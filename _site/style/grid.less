@@ -1,0 +1,172 @@
+@hand: 400px;
+@lap:  550px;
+@desk: 900px;
+@maxwidth: 50em;
+
+/*
+// Debug 
+section {
+	background-color: fade(green, 10%);
+}
+
+section > .inner,
+section h1.title {
+	background-color: fade(red, 20%);
+}
+
+.col {
+	outline: 1px dotted blue;
+}
+
+.col2 {
+	outline: 1px dashed blue;
+}
+
+.col3 {
+	outline: 1px solid blue;
+}
+
+section > .inner {
+
+	.col, .col2, .col3 {
+		background: fade(red, 20%);
+	}
+}
+
+// */
+
+#debug {
+	position: fixed;
+	top:0;
+	left:0;
+	z-index: 50000;
+	color: red;
+}
+
+// --------------------------------------------------------------- BASIC layout
+section > .inner {
+	// what whas that good for?
+	// * {
+	// 	clear: left;
+	// }
+	
+	.col, .col2, .col3 {
+		clear: none;
+		float: left;
+	}
+}
+
+section > .inner:after,
+section > .inner .clr,
+hr.clr { // strangley, safari needs this 
+	clear: both;
+	display: block;
+	border-color: transparent;
+	content: " ";
+}
+
+// --------------------------------------------------------- HAND sized devices
+section > .inner,
+section h1.title {
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+}
+
+// the following provides for a seemless transition from 80% to 95% width on
+// narrow devices
+@media screen and (max-width: (@hand/.8)) {
+	section > .inner,
+	section h1.title {
+		width: @hand;
+	}
+}
+
+@media screen and (max-width: (@hand/.95)) {
+	section > .inner,
+	section h1.title {
+		width: 95%;
+	}
+}
+
+section > .inner {
+	@w: 95%;
+	@m: (100% - @w);
+	
+	.col, .col2, .col3 {
+		width: @w;
+		padding: 0;
+		margin-left: (@m/2);
+		margin-right: (@m/2);
+	}
+}
+
+// ---------------------------------------------------------- LAP sized devices
+@media screen and (min-width: @lap){
+
+	section > .inner {
+		// 2-column layout
+		@w: 47.5%;
+		@m: ((100% - 2 * @w) / 2);
+
+		.col, .col2, .col3 {
+			margin-left: (@m/2);
+			margin-right: (@m/2);
+		}
+		
+		.col {
+			width: @w;
+		}
+		
+		.col2, .col3 {
+			width: 2*@w + @m;
+		}
+	}	
+	
+	#debug:after {
+		content: "lap";
+	}
+}
+
+// ------------------------------------------------------ DESKTOP sized devices
+@media screen and (min-width: @desk){
+	section > .inner,
+	section h1.title {
+		max-width: unit(@maxwidth * unit(@fontsize), px); // 60em, independent of fontsize of h1
+	}
+	
+	section > .inner {
+		// 3 column layout
+		@w: 32%;
+		@m: ((100% - 3*@w)/ 3);
+		
+		.col, .col2, .col3 {
+			margin-left: (@m/2);
+			margin-right: (@m/2);
+		}
+		
+		.col {
+			width: @w;
+		}
+		
+		.col2 {
+			width: 2*@w + @m;
+		}
+		
+		.col3 {
+			width: 3*@w + 2*@m;
+		}
+		
+		.spc1 {
+			margin-left: @w + 3*@m/2;
+		}
+		
+		.spc2 {
+			margin-left: 2*@w + 5*@m/2;
+		}
+	}
+	
+	#debug:after {
+		content: "desk";
+	}
+}
