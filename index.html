@@ -1,1 +1,613 @@
-Hello github.
+
+<!DOCTYPE html lang="en">
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <script src="script/modernizr-2.6.2.min.js"></script>
+		
+		
+			<link rel="stylesheet" type="text/css" href="style/style.css" />
+		
+		
+		<script>
+		var _ = (function(window){
+			return {
+				/**
+				 * get element by id
+				 */
+				gid: function(x) {
+					return document.getElementById(x);
+				},
+				/**
+				 * Add event listener to window
+				 */
+				ael: function(args){
+					if(window.addEventListener) {
+						window.addEventListener.apply(window, arguments);
+					} else {
+						window.attachEvent.apply(window, arguments);
+					}
+				},
+
+				/**
+				 * returns the dimensions of the viewport
+				 */
+				dvp: function() {
+					var w=window,d=document,e=d.documentElement,g=d.getElementsByTagName('body')[0],
+					    x=w.innerWidth||e.clientWidth||g.clientWidth,
+						y=w.innerHeight||e.clientHeight||g.clientHeight;
+					return {w:x, h:y}
+				},
+				
+				/**
+				 * is number
+				 */
+				isN: function(x){
+					return "number" == typeof(x);
+				},
+				
+				/**
+				 * resizes a text (font-size) by the width 
+				 * of its parent element or ratio of viewport width 
+				 */
+				fit: function(el, options) {
+					var options = options || {},
+						min = (_.isN(options.min) ? options.min : 0), // minimum font size
+						max = (_.isN(options.max) ? options.max : Infinity), // maximum font size
+						f = (_.isN(options.f) ? options.f : 1), // scale factor						
+						w = (_.isN(options.w) ? options.w : false); // ratio of width of page (widht of parent element will be used if 0 or undefined)
+						
+					var c = function() {
+						var e = ("string" == typeof(el) ? _.gid(el) : el),
+						    s = Math.max(Math.min((w ? _.dvp().w*w : e.clientWidth) / (f*10), 
+												parseFloat(max)), 
+													parseFloat(min)) + 'px';
+						e.style.fontSize = s;
+      				}
+					
+					_.ael("resize", c);
+					_.ael("orientationchange", c);
+					c();
+				},
+				
+				encode: function (string){
+					return string.split("").map(function(i){return (i.charCodeAt(0)+13)}).join("|");
+
+				},
+
+				decode: function (string) {
+					return string.split("|").map(function(i){return String.fromCharCode(parseInt(i) - 13)}).join("");
+				}
+			}
+		})(window);
+		
+		</script>
+
+    </head>
+    <body>
+		<!--[if lt IE 9]>
+		  <script>
+		    document.createElement("header" );
+		    document.createElement("footer" );
+		    document.createElement("section"); 
+		    document.createElement("aside"  );
+		    document.createElement("nav"    );
+		    document.createElement("article"); 
+		    document.createElement("hgroup" ); 
+		    document.createElement("time"   );
+		  </script>
+		  <noscript>
+		     <strong>Warning!</strong>
+		     Because your browser does not support HTML5, some elements are simulated using JScript.
+		     Unfortunately your browser has disabled scripting. Please enable it in order to display this page.
+		  </noscript>
+		<![endif]-->
+
+		<section id="teaser">
+			<span class="updateWindowTitle" style="display:none;">BPM Expert · IT Engineer</span>
+			
+			<!-- photo, title, navigation with abstract if screen is large -->
+			<div id="welcome">
+				<h1 id="teasertitle"><strong>MA<span style="margin-left: -0.1em"/>TTHIAS</strong>KUNZE</h1>
+				<h2 id="teasersubtitle"><span>BPM Expert &middot; IT Engineer</span></h2>
+			</div>
+			
+			<div id="teasernav"><ul>
+				<li><a href="#about"><i class="icon about"></i></a>
+					<span class="abstract">
+						<h3>About me</h3><br/></i>
+						<p>
+							I am a researcher and lecturer at the Hasso Plattner Institute who 
+							loves his family and his professional activities, as well.
+						</p>
+					</span>
+				</li>
+			
+				<li><a href="#curriculum"><i class="icon curriculum"></i></a>
+					<span class="abstract">
+						<h3>Curriculum</h3><br/>
+						<p>
+						Within the last 10 years I have learnt a lot, earned a number of 
+						degrees and gained experiences in software engineering and business process management.
+						</p>
+					</span> 
+				</li>
+			
+				<li><a href="#projects"><i class="icon projects"></i></a>
+					<span class="abstract">
+						<h3>Projects</h3><br/>
+						<p>In my time as a doctoral candidate and post-doc, 
+							I followed several research directions and I participated in a
+							number of projects with industrial partners to tackle
+							exciting challenges and provide pragmatic solutions.</p>
+					</span>
+				</li></ul>
+			</div>
+			
+			<div id="scrolldown"><img src="/img/down.png" class="icon" /></div>
+			
+			</section>
+		<script>
+
+		_.ael("load", function(){
+			// retain ratio from layout.css
+			// title:    4em,        min 30
+			// subtitle: 4em/2.5em
+			// hello:    4em/1.6em
+			var w = 0.4, min = 33.33, max = 100, rs = 4/2.3, rh = 4/1.8;
+
+			_.fit("teasertitle", {w: w, min: min, max:max});  
+			_.fit("teasersubtitle", {w: w, min: min/rs, max: max/rs, f: rs});
+			_.fit("hello", {w: w, min: min/rh, max: max/rh, f: rh});
+		});
+		
+		</script>
+
+		<section id="about">
+			<h1 class="title updateWindowTitle">About me </h1>
+			<div class="inner">
+				<div class="col" id="twelvemonths">
+					<h3>In the past 12 months ...</h3>
+					
+					<figure>
+						<img src="/img/about/baby_feet-75.png" class="blackToText"/>
+						<figcaption>I became father of a bright and beautiful girl.</figcaption>
+					</figure>
+					<figure>
+						<img src="/img/about/student-75.png" class="blackToText" />
+						<figcaption>I defended my thesis and received a PhD degree.</figcaption>
+					</figure>
+					<figure>
+						<img src="/img/about/mountain_biking-75.png" class="blackToText" />
+						<figcaption>I rode about 4500 kilometers on my bicycle.</figcaption>
+					</figure>
+				</div>
+				
+				<div class="col2">
+					<h3>Hello there!</h3>
+					<p>I am Matthias – thirty years of age and located in <a href="https://www.google.com/maps/place/Berlin" target="_blank"><span class="lnk">Berlin</span></a>, Europe's most vibrant and innovative capital. <br/>
+					Three hearts beat in my chest: one for my family, one for my work, and one for photography</a>. To keep them at pace, I am also a compassionate cyclist. <br/>
+					I love to play with technology, I enjoy coding, and I find delight in creating useful and beautiful things. That said, I consider my workplace as a playground.
+					</p>
+				</div>
+				
+				<blockquote class="col2">
+					<p>Fun fact: Before going to sleep on a workday, I do a series of thirty pushups for every cup of coffee I drank throughout the day.</p>
+				</blockquote>
+								
+				<div class="col2">
+					<h3>A brief history of me</h3>
+					<p>
+						As I went through school like many, I've been drawn to the world's mechanics – mathematics, physics, ... and computer science. <br/>
+						I figured that I should either become a science teacher or a computer scientist. Back in 2003, I found myself studying <strong>software engineering</strong> at the HPI; at which I excelled and have been awarded best of class receiving my <strong>master's degree</strong> in 2009.
+					</p>
+					<p>					
+						Five years on, I have pursued the technological area of <strong>business process management</strong> further. 
+						As a lecturer enjoy sharing my knowledge with students. As a researcher, I stay curious and challenge myself with behavioral analytics. 
+						In my <strong>dissertation</strong>, I developed a search engine for process models.<br/>
+						<!-- You can read more in my <a href="#curriculum"><span class="lnk">resumé</span></a>. -->
+					</p>	
+				</div>
+				<div class="col2 clr">
+					<p>
+						Want to know me better? There you go.
+					</p>
+					<ul>
+						<li><a href="http://twitter.com/matthias_k"><img class="icon inv" src="/img/about/twitter-26.png" /></a> Follow my musings on <a href="http://twitter.com/matthias_k"><span class="lnk">twitter</span></a>.</li>
+						<li><a href="http://www.flickr.com/photos/mtkunze/sets/"><img class="icon inv" src="/img/about/flickr-26.png" /></a> Watch some photos of mine on <a href="http://www.flickr.com/photos/mtkunze/sets/"><span class="lnk">flickr</a>.</li>
+
+	<li><a href="http://bpt.hpi.uni-potsdam.de/Public/MatthiasKunze"><img class="icon inv" src="/img/hireme/hpi-26.png" /></a> Visit my research profile at <a href="http://bpt.hpi.uni-potsdam.de/Public/MatthiasKunze"><span class="lnk">HPI</span></a>.</li>
+	<li><a href="http://linkedin.com/in/matthiaskunze/"><img class="icon inv" src="/img/hireme/linkedin-26.png" /></a> Connect with me on <a href="http://linkedin.com/in/matthiaskunze/"><span class="lnk">Linked<span style="padding-left: 1pt">in</span></span></a>.</li>
+	<li><a href="https://www.xing.com/profile/Matthias_Kunze20"><img class="icon inv" src="/img/hireme/xing-26.png" /></a> Connect with me on <a href="https://www.xing.com/profile/Matthias_Kunze20"><span class="lnk">Xing</span></a>.</li>
+							
+							
+					</ul>
+				</div>
+
+		</div></section>
+		
+		
+				
+		<section id="curriculum">
+			<h1 class="title updateWindowTitle">Curriculum</h1>
+			
+			<!-- curriculum vitae -->
+			
+			<!-- professional: learn and practice / education and experience-->
+			
+			<ul id="cv" class="inner">
+				<li class="learn">
+					<h3 class="title">Graduation, Dr. rer. nat <span class="detail">(magna cum laude)</span></h3>
+					<span class="time">
+						October 2013<br/>
+						HPI, University of Potsdam</span>
+					
+					I defended my <a href="http://opus.kobv.de/ubp/volltexte/2013/6884/" target="_blank"><span class="lnk">thesis</span></a> “Searching business process models by example” and received a doctoral degree in computer science.<br/>
+					I work as a post-doc researcher at the Hasso Plattner Institute since, and held a lecture on business process compliance in the last winter term.
+				</li>
+				
+				<li class="practice">
+					<h3 class="title">Researcher, Assistant Lecturer</h3>
+					<span class="time">
+						May 2009 – now<br/>
+						HPI, University of Potsdam</span>
+					
+						In the last five years, I have been a researcher and lecture assistant at the Business Process Technology group of the Hasso Plattner Institute. <br/>
+						My position as a lecture assistant provided me with an exhaustive knowledge of the topics of business process technologies, modeling of information systems, and business process management. I gained experience in these topics in various <a href="#projects"><span class="lnk">projects</span></a> with industrial and academic partners that I participated in. <br/>
+						The main emphasize of my research is on the analysis of business process behavior, business process similarity and querying. I developed means for the efficient and effective retrieval of business process models in large repositories. Besides, I covered topics of event processing and business activity monitoring.
+						
+				</li>
+				
+				<li class="practice">
+					<h3 class="title">Research Internship</h3>
+					<span class="time">
+						April 2008 – October 2008<br/>
+						SAP Labs, Palo Alto (CA)</span>
+					
+					Working in the Advanced Web Technologies group in Palo Alto  we dove into encapsulating object-oriented data services in a RESTful interface. As a part of the result, I developed an optimistic transaction protocol for web data services.
+				</li>
+				
+				<li class="learn">
+					<h3 class="title">Master Programme in Software Enginering, Master of Science <span class="detail">(M.Sc., 1.0, best of class)</span></h3>
+					<span class="time">
+						April 2007 – March 2009<br/>
+						HPI, University of Potsdam</span>
+					
+						Topics of the master's programme address predominantly on the processes of development, distribution, and orchestration of software systems. In addition to specializations in software engineering, students acquire people skills which form a major part of successful project management.<br/>
+					
+						In my master studies, I chose to put an emphasize on the following topics in software engineering: enterprise architectures, project management, and business process technologies.					
+				</li>
+				
+				<li class="learn">
+					<h3 class="title">Exchange term in the master programme</h3>
+					<span class="time">
+						August 2007 – December 2007<br/>
+						University of Jyväskylän, Finland</span>
+					
+						As part of my master studies, I spent a term as an exchange student in Jyväskylä and experienced a broad variety of cultures – not only the Finnish. My curriculum focused on requirements engineering and service oriented architectures.
+				</li>
+				
+				<li class="practice">
+					<h3 class="title">Development and System Design</h3>
+					<span class="time">
+						October 2006 – July 2007<br/>
+						HPI, University of Potsdam; Schenker AG</span>
+					
+					In the graduation project of the Bachelor programme at the Hasso Plattner Institute, we – a team of five – developed the system architecture for an innovative logistics management system for the second largest logistics service provider Schenker. <br/>
+					
+					After graduation, we were asked to further contribute to the project to fuel its realization.
+				</li>
+				
+				<li class="learn">
+					<h3 class="title">Bachelor Programme in Software Enginering, Bachelor of Science <span class="detail">(B.Sc., 1.3)</span></h3>
+					<span class="time">
+						October 2003 – March 2007<br/>
+						HPI, University of Potsdam</span>
+					
+						The bachelor programme in Software engineering at the Hasso Plattner Institute focused on establishing a profound knowledge of formal models for software architectures, design patterns and concepts of programming languages, and software development processes. <br/> During my studies, I exercised an abundance of programming languages and software technologies for service oriented computing.
+					
+				</li>
+				
+				<li class="practice">
+					<h3 class="title">Student Assistant</h3>
+					<span class="time">
+						March 2004 – September 2006<br/>
+						HPI, University of Potsdam</span>
+					
+					During my studies, I contributed in several research and software development projects at the Hasso Plattner Institute, joining the chairs for Enterprise Platforms and Integration Concepts, Computer Graphics, and Business Process Technology
+				</li>	
+				
+				<li class="practice">
+					<h3 class="title">Civil Service</h3>
+					<span class="time">
+						September 2002 – June 2003<br/>
+						Special school, Meißen (Germany)</span>
+					
+						As a replacement for the German obligatory military service at the time, I opted for the so-called <em>civil service</em> at a school for mentally handicapped children. My responsibilities laid in the supervision and personal care for children of age 6 to 16.
+				</li>
+				
+				<li class="learn">
+					<h3 class="title">High school, Abitur <span class="detail">(1.3)</span></h3>
+					<span class="time">
+						July 2002
+						Franziskaneum, Meißen (Germany)</span>
+					
+						At high school, I chose the natural science profile with an emphasis on physics and mathematics. 
+				</li>
+				</ul>			
+		</section>
+		
+		<section id="projects">
+			<h1 class="title updateWindowTitle">Projects</h1>
+			<div class="inner">
+				<p class="col3">During my time as a researcher at the business process technology group of the Hasso Plattner Institute, I contributed to a number of projects with other scientific institutions and industrial partners. In many cases, these projects show the relevance of scientific results made in our group and their applicability in practice.</p>
+
+			<ul id="projectsinner">
+							
+			<li class="project col">
+				<i class="logo get"></i>
+				<h3>Green European Transportation</h3>
+				<span class="time">since 2011</span>
+				<span class="location">
+					<a href="http://getservice-project.eu/en/project/consortium">Intl. Consortium</a>
+				</span>
+				<p> The <a href="http://getservice-project.eu/"><span class="lnk">GET</span></a> service platform provides logistics service providers with the means to plan transportation routes more efficiently and to respond quickly to unexpected events. <br/>
+					The project funded by the European Commission explores innovative ways to combine real-time event processing, business process technologies, and transportation scheduling to reduce pollution and make transportation in Europe more friendly to the environment.
+				</p>
+			</li>
+			
+			<li class="project col">
+				<i class="logo bpmai"></i>
+				<h3><span style="padding-right: .5em">BPM</span> <span style="padding-right: .5em">Academic</span> Initiative</h3>
+				<span class="time">since 2009</span>
+				<span class="location">
+					<a href="http://hpi.uni-potsdam.de">HPI</a>, 
+					<a href="http://signavio.com">Signavio</a></span>
+				<p>Together with the newly founded start-up Signavio, the BPT group and five leading academic institutions in the area of BPM joined forces in the academic <a href="http://bpmai.org"><span class="lnk">initiative</span></a>, providing a process modeler and teaching material free of charge to students and lecturers, likewise. Since 2011, we offer a growing collection of real business process models for empirical research in academia.
+				</p>
+			
+			<li class="project col">
+				<i class="logo pige"></i>
+				<h3>Process Intelligence in Health Care</h3>
+				<span class="time">2011 - 2013</span>
+				<span class="location">
+					<a href="http://hpi.uni-potsdam.de">HPI</a>, 
+					<a href="www.uniklinikum-jena.de/en/Wir_über_uns.html">Jena University Hospital</a>, 
+					<a href="https://www.signavio.com">Signavio</a></span>
+				<p>Healthcare organizations face the challenge to remain efficient with ever increasing complexity and cost-pressure of treatment procedures. In the <a href="http://pige-projekt.de"><span class="lnk">project</span></a>, we developed models to correlate treatment data with business process models in order to monitor and analyze treatment processes in realtime. A prototype has been developed that supports these aspects while maintaing high privacy and security standards.
+				</p>
+			</li>
+			
+			<li class="project col">
+				<i class="logo interchange"></i>
+				<h3>Business Process Model Interchange</h3>
+				<span class="time">2011 - 2012</span>
+				<span class="location">
+					<a href="http://hpi.uni-potsdam.de">HPI</a>,
+					<a href="http://signavio.com">Signavio</a>,
+					<a href="http://sap.com">SAP</a></span>
+				</span>
+				<p>
+					BPMN 2.0 standardizes not only the process meta-model and semantics, but also an exchange format that aims at the integration of models on different levels. <br/> In a corporate project with development facilities of Signavio and SAP NetWeaver, we investigated the gap between organizational business process models and their technical implementation and execution in a process engine. The <a href="http://bpt.hpi.uni-potsdam.de/pub/Public/WebHome/Integration_of_SAP_NetWeaver_BPM_and_Signavio_Process_Editor.pdf"><span class="lnk">report</span></a> shows that this gap is bridged successfully.
+				</p>
+			</li>
+			
+			<li class="project col">
+				<i class="logo monitoring"></i>
+				<h3>Monitoring of Process Interaction</h3>
+				<span class="time">2011</span>
+				<span class="location">
+					<a href="http://hpi.uni-potsdam.de">HPI</a>,
+					German Health Insurance</span>
+				<p>
+					In process choreographies, where business processes of different participants interact, monitoring and performance analysis is difficult, as delays may occur by waiting for certain responses. <br/> To correctly monitor service level agreements of a health insurance company, we developed the <a href="dx.doi.org/10.1007/978-3-642-37804-1_23"><span class="lnk">foundations</span></a> to support the monitoring processes interactions, particularly if only few events can be detected. A prototype has been developed validating the theoretical results.
+					
+				</p>
+			</li>
+			
+			<li class="project col">
+				<i class="logo automation"></i>
+				<h3>Process Automation and Verification</h3>
+				<span class="time">2010</span>
+				<span class="location">
+					<a href="http://hpi.uni-potsdam.de">HPI</a>,
+					IT Service Provider</span>
+				<p>
+					Business process models cater the understanding of how organizations carry out their operations. However, they can also assist in controlling these operations, if they are orchestrated by software. <br/>
+					In a project with a German IT service provider, we developed a <a href="dx.doi.org/10.1007/978-3-642-21759-3_17"><span class="lnk">methodology</span></a> and prototype that incorporates data dependencies and a repository of services to configure business processes, ensure their consistency, and run them in a process engine.
+				</p>
+			</li>
+			
+			<li class="project col">
+				<i class="logo modeling"></i>
+				<h3>Process Modeling and Documentation</h3>
+				<span class="time">2010</span>
+				<span class="location">
+					<a href="http://hpi.uni-potsdam.de">HPI</a>,
+					German Health Insurance</span>
+				</span>
+				<p>
+					In order to understand, optimize, and unify the operations of an organization, they need to be captured in an unambiguous and consistent representation that is easy to understand – business process models. <br/>
+					Together with a German health insurance provider, we developed modeling guidelines and best practices to model business processes of a branch of the insurance company, and supported the elicitation of these processes.
+				</p>
+			</li>
+			
+
+			
+			<li class="project col">
+				<i class="logo oryx"></i>
+				<h3>Oryx — Web-based Model Editor</h3>
+				<span class="time">2007 - 2009</span>
+				<span class="location">HPI (University of Potsdam)</span>
+				<p>The Oryx modeler emerged from a students' project at the <a href="http://bpt.hpi.uni-potsdam.de"><span class="lnk">BPT</span></a> group at HPI in 2006 and has received remarkable attention by both academia and industry. I joined the project as a developer in 2007 and later coordinated development efforts at the HPI. It's success led to the foundation of a spin-off by the original inventors in 2009: the Signavio Process Editor.
+				</p>
+			</li>
+			
+		</ul></section>
+				
+		<section id="misc">
+			<span class="title" style="display:none">Miscellaneous</span>
+			<div class="inner">
+				<div class="col">
+					<h3>Contact</h3>
+					<p>
+						Feel free to send me a message. Please, leave your name and e-mail address, so I can get back to you. <br/>
+						Please note that your message will be processed and stored in Google Drive.
+						<noscript><p>
+							The contact form does not work, because you have javascript disabled. Please follow this <a href="https://docs.google.com/a/matthias-kunze.info/forms/d/1J896jf7e1boMDXCfgxWSVSHmuONNN-nutrFrvEG_yQw/viewform"><span class="lnk">link</span></a>.
+						</p></noscript>
+					</p>
+				</div>
+				<form id="contact" class="col2" action="" method="POST">
+					<!-- from google forms -->
+					<input type="hidden" name="draftResponse" value="[,,&quot;-6722092732372038941&quot;]">
+					<input type="hidden" name="pageHistory" value="0">
+					<input type="hidden" name="fromEmail" value="false">
+					<!-- from google forms -->
+					
+					<input type="hidden" name="fbzx" value="-6722092732372038941">
+					
+					<div class="name">
+						<input id="name" name="entry.418961107" type="text" value="" required disabled="disabled" />
+						<label for="name">Your name</label>
+					</div>
+					<div class="mail">
+						<input id="mail" name="entry.1686305661" type="text" value="" required disabled/>
+						<label for="mail">Your e-mail address</label>
+					</div>
+					<div>
+						<textarea id="msg" name="entry.1247928453" required disabled></textarea>
+						<label for="msg">Your message</label>
+					</div>
+					<div>
+						<input id="submit" type="submit" class="submit" value="send" disabled/>
+					</div>
+					<script>
+					
+					var elements = Array.prototype.filter
+						.call(_.gid("contact").elements, function(e) {
+							return e.type == "text" || e.type == "textarea";
+						});
+						
+					elements.forEach(function(e){
+						e.value = "";
+						e.disabled = false;
+					
+						function update() {
+							
+							// state of current field
+							if (e.value.length > 0) {
+								if (!e.className.match(/ok/)) {
+									e.className = e.className + " ok";
+								}
+							} else {
+								if (e.className.match(/ok/)) {
+									e.className = e.className.replace (/ok/g,"");
+								}
+							}
+							
+							// state of all
+							if (elements.every(function(e){
+								return e.className.match(/ok/);
+							})) {
+console.log("ok")								
+								_.gid("submit").disabled = false;
+								_.gid("contact").action = _.decode("117|129|129|125|128|71|60|60|113|124|112|128|59|116|124|124|116|121|114|59|112|124|122|60|110|60|122|110|129|129|117|118|110|128|58|120|130|123|135|114|59|118|123|115|124|60|115|124|127|122|128|60|113|60|62|87|69|70|67|119|115|68|114|62|111|124|90|81|101|80|115|116|133|100|96|99|96|85|122|130|92|91|91|91|58|123|130|129|127|83|127|131|82|84|108|134|94|132|60|115|124|127|122|95|114|128|125|124|123|128|114");
+							}
+							else {
+console.log("!ok")								
+								_.gid("submit").disabled = true;
+								_.gid("contact").action = "";
+							}
+						}
+						
+						e.onkeyup = update;
+						e.onblur = update;
+					});
+					</script>
+					
+				</form>
+				
+				<div class="col3">
+					<h3>About this page</h3>
+					This page uses some icons from <a href="http://icons8.com/" target="_blank"><span class="lnk">Icons8</span></a> and 
+					is hosted by <a href="http://github.io/" target="_blank"><span class="lnk">GitHub</span></a>. 
+					The code is published under an open source license and available <a href="https://github.com/mtkunze/mtkunze.github.io"><span class="lnk">here</span></a>.
+					It makes extensive use of JavaScript and CSS; if you experience any problem, please file a <a href="https://github.com/mtkunze/mtkunze.github.io/issues"><span class="lnk">report</span></a>. 
+				</div>
+			</div>
+		</section>
+		
+		<hr class="clr" id="contact"/>
+		
+		<nav>
+			<section id="navigation"><ul class="inner">
+				<li class="up"><a href="#top" ><img src="/img/up.png" class="icon inv" /></a></li>
+				<li><a href="#about"><i class="icon about"></i><span class="caption">About me</span></a></li>
+				
+				<li><a href="#curriculum"><i class="icon curriculum"></i><span class="caption">Curriculum</span></a></li>
+				<li><a href="#projects"><i class="icon projects"></i><span class="caption">Projects</span></a></li>
+			</ul></section>
+		</nav>
+		
+		<script>
+		Array.prototype.forEach.call(document.getElementsByTagName("section"), function(section){
+			var w = .7, min = 33.33, max = 100;
+			var child = Array.prototype.filter.call(section.childNodes, function(child){
+				if (!!child.className && child.className.match("title")) {
+					return child;
+				}
+			});
+			
+			if (child[0]) {
+				_.ael("load", function(){
+					_.fit(child[0], {w: w, min: min, max: max}); 
+				});
+			}
+		});
+		</script>
+		<script>
+		(function(){
+			var TITLE = "Matthias Kunze – ";
+			function title(){
+			    Array.prototype.forEach.call(document.getElementsByClassName("updateWindowTitle"), function(h){
+			        var s = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+			            v = _.dvp().h,
+			            o = h.offsetTop;
+        			
+					// focus element is above upper half of visible area
+			        if(o - s < v/2) {
+			            document.title = TITLE + h.innerHTML.replace(/(<([^>]+)>)/ig,"");
+			        }
+			    });
+			};
+			_.ael("resize", title);
+			_.ael("scroll", title);
+			title();
+		})();
+		</script>
+		<script>
+		(function(){
+			function margin(){
+				var s = window.getComputedStyle(_.gid("misc"));
+				var h = 0;
+				["height", "paddingBottom", "paddingTop", "marginBottom", "marginTop"].forEach(function(p){
+					h += parseInt(s[p]);
+				});			
+				_.gid("projects").style.marginBottom = h + "px";
+			}
+			_.ael("resize", margin);
+			_.ael("load", margin);
+		})();
+		</script>
+
+		
+    </body>
+</html>
