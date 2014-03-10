@@ -13,7 +13,7 @@
         <script src="script/modernizr-2.6.2.min.js"></script>
 		
 		
-			<link rel="stylesheet" type="text/css" href="style/style.css" />
+			<link rel="stylesheet/less" type="text/css" href="style/style.less" />
 		
 		
 		<script>
@@ -600,14 +600,89 @@ console.log("!ok")
 				var h = 0;
 				["height", "paddingBottom", "paddingTop", "marginBottom", "marginTop"].forEach(function(p){
 					h += parseInt(s[p]);
-				});			
-				_.gid("projects").style.marginBottom = h + "px";
+				});
+				
+				if (h > _.dvp().h) {
+					_.gid("misc").style.position = "relative";
+					_.gid("projects").style.marginBottom = "inherit";
+				}
+				else {
+					_.gid("misc").style.position = "fixed";
+					_.gid("projects").style.marginBottom = h + "px";
+				}
 			}
-			_.ael("resize", margin);
-			_.ael("load", margin);
+			
+			// only change position fixed/Relative on no-touch devices
+			// will be relative on touch devices by CSS
+			if (!Modernizr.touch) {
+				_.ael("resize", margin);
+				_.ael("load", margin);
+			}	
 		})();
 		</script>
 
+		
+		<!-- .............................................................................................................. -->
+		<script>
+		  less = {
+		    env: "development",
+			logLevel: 1
+		  };
+		</script>
+		<script src="script/less.js"></script>
+		
+		<script>
+		if (document.location.search.match(/watch/)) {
+				console.log("less watches" + (less.watch() ? "" : "not"));
+		}
+		</script>
+		
+		<script>
+		if (document.location.search.match(/debug/)) {
+			// show viewport dimensions
+			
+			var w=window,
+			    d=document,
+			    e=d.documentElement,
+			    b=d.getElementsByTagName('body')[0];
+			
+			var p = document.createElement("pre");
+			    p.id="debug";
+				document.body.appendChild(p);
+				
+			var c = function(){
+				_.gid("debug").innerHTML = 
+					" win:  " + w.innerWidth + " × " + w.innerHeight + "\n" + 
+				    " doc:  " + e.clientWidth + " × " + e.clientHeight + "\n" + 
+					" body: " + b.clientWidth + " × " + b.clientHeight + "\n ";
+				
+			};
+			_.ael("resize", c);
+			c();
+		}
+		
+		if (document.location.search.match(/validate/)) {
+			// some functions to chekc sonsistency of page ********************
+			
+			// check links
+			Array.prototype.forEach.call(document.querySelectorAll("section a"), function(a){
+				if (0 == a.childNodes.length || !a.childNodes[0].className || !a.childNodes[0].className.match(/lnk/)) {
+					a.title = "missing parent node .lnk";
+					a.style.backgroundColor = "red";
+				}
+			});
+			
+			// check layout
+			Array.prototype.forEach.call(document.querySelectorAll("section > *"), function(e){
+				if (-1 == e.className.split(" ").indexOf("inner") && !e.className.match(/title/)) {
+					e.appendChild(document.createTextNode("Missing class .inner"));
+					e.style.backgroundColor = "red";
+				}
+			});
+			
+		}
+		
+		</script>
 		
     </body>
 </html>

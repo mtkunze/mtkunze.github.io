@@ -750,11 +750,7 @@ nav {
 	}
 }
 
-/******** LEGAL **************************************************************/
-
-#projects {
-	margin-bottom: 30em;
-}
+/******** MISC ***************************************************************/
 
 #teaser, #projects {
 	box-shadow: 0 5px 4px -3px darken(@back, 60%);
@@ -765,7 +761,7 @@ nav {
 	
 	@ls: 0.8em;
 	@lo: 1.8;
-	margin-bottom: 1.7em;
+
 	
 	> div.name, > div.mail {
 		width: 49%;
@@ -792,9 +788,6 @@ nav {
 			box-shadow:none;
 			border: 0px solid fade(@text, 50%);
 			background-color: fade(white, 60%);
-		}
-		input{
-//			border-bottom-width: 1px;
 		}
 	
 		label {
@@ -852,11 +845,18 @@ nav {
 	}
 }
 
+.no-touch {
+	#misc {
+		padding-bottom: 70px; // height of navigation
+		position: fixed;
+	}
+	#projects {
+		margin-bottom: 30em;
+	}
+}
 
 section#misc {
 	background-color: transparent;
-	position: fixed;
-	padding-bottom: 70px; // height of navigation
 	width: 100%;
 	bottom: 0;
 	z-index: -9;
