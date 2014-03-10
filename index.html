@@ -620,6 +620,19 @@ console.log("!ok")
 			}	
 		})();
 		</script>
+		<script>
+			// this avoids constant resizing on touch devices that hide/show
+			// the address bar when scrolling
+			(function(){
+				if(Modernizr.touch) {
+					_.ael("load", function(){
+						var t = _.gid("teaser");
+						t.style.height = Math.min(_.dvp().h, parseInt(window.getComputedStyle(t).height)) + "px";
+					});
+				}
+			})()
+			
+		</script>
 
 		
     </body>
