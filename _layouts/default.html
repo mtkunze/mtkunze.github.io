@@ -12,7 +12,7 @@
 
         <script src="script/modernizr-2.6.2.min.js"></script>
 		
-		{% if debug %}
+		{% if page.debug %}
 			<link rel="stylesheet/less" type="text/css" href="style/style.less" />
 		{% else %}
 			<link rel="stylesheet" type="text/css" href="style/style.css" />
@@ -131,7 +131,7 @@
 						</p>
 					</span>
 				</li>
-{% if hire %}		
+{% if page.hire %}		
 				<li><a href="#hireme"><i class="icon hire"></i></a>
 					<span class="abstract">
 						<h3>Hire me</h3><br/>
@@ -234,7 +234,7 @@
 					<ul>
 						<li><a href="http://twitter.com/matthias_k"><img class="icon inv" src="/img/about/twitter-26.png" /></a> Follow my musings on <a href="http://twitter.com/matthias_k"><span class="lnk">twitter</span></a>.</li>
 						<li><a href="http://www.flickr.com/photos/mtkunze/sets/"><img class="icon inv" src="/img/about/flickr-26.png" /></a> Watch some photos of mine on <a href="http://www.flickr.com/photos/mtkunze/sets/"><span class="lnk">flickr</a>.</li>
-{% if hire %}{% else %}
+{% if page.hire %}{% else %}
 	<li><a href="http://bpt.hpi.uni-potsdam.de/Public/MatthiasKunze"><img class="icon inv" src="/img/hireme/hpi-26.png" /></a> Visit my research profile at <a href="http://bpt.hpi.uni-potsdam.de/Public/MatthiasKunze"><span class="lnk">HPI</span></a>.</li>
 	<li><a href="http://linkedin.com/in/matthiaskunze/"><img class="icon inv" src="/img/hireme/linkedin-26.png" /></a> Connect with me on <a href="http://linkedin.com/in/matthiaskunze/"><span class="lnk">Linked<span style="padding-left: 1pt">in</span></span></a>.</li>
 	<li><a href="https://www.xing.com/profile/Matthias_Kunze20"><img class="icon inv" src="/img/hireme/xing-26.png" /></a> Connect with me on <a href="https://www.xing.com/profile/Matthias_Kunze20"><span class="lnk">Xing</span></a>.</li>
@@ -245,7 +245,7 @@
 
 		</div></section>
 		
-{% if hire %}		
+{% if page.hire %}		
 		<section id="hireme">
 			<h1 class="title updateWindowTitle">Hire me!</h1>
 			<div class="inner">
@@ -623,7 +623,7 @@ console.log("!ok")
 			<section id="navigation"><ul class="inner">
 				<li class="up"><a href="#top" ><img src="/img/up.png" class="icon inv" /></a></li>
 				<li><a href="#about"><i class="icon about"></i><span class="caption">About me</span></a></li>
-{% if hire %}
+{% if page.hire %}
 				<li><a href="#hireme"><i class="icon hire"></i><span class="caption">Hire me</span></a></li>
 {% endif %}				
 				<li><a href="#curriculum"><i class="icon curriculum"></i><span class="caption">Curriculum</span></a></li>
@@ -674,15 +674,28 @@ console.log("!ok")
 				var h = 0;
 				["height", "paddingBottom", "paddingTop", "marginBottom", "marginTop"].forEach(function(p){
 					h += parseInt(s[p]);
-				});			
-				_.gid("projects").style.marginBottom = h + "px";
+				});
+				
+				if (h > _.dvp().h) {
+					_.gid("misc").style.position = "relative";
+					_.gid("projects").style.marginBottom = "inherit";
+				}
+				else {
+					_.gid("misc").style.position = "fixed";
+					_.gid("projects").style.marginBottom = h + "px";
+				}
 			}
-			_.ael("resize", margin);
-			_.ael("load", margin);
+			
+			// only change position fixed/Relative on no-touch devices
+			// will be relative on touch devices by CSS
+			if (!Modernizr.touch) {
+				_.ael("resize", margin);
+				_.ael("load", margin);
+			}	
 		})();
 		</script>
 
-		{% if debug %}
+		{% if page.debug %}
 		<!-- .............................................................................................................. -->
 		<script>
 		  less = {
@@ -702,12 +715,21 @@ console.log("!ok")
 		if (document.location.search.match(/debug/)) {
 			// show viewport dimensions
 			
-			var d = document.createElement("pre");
-			    d.id="debug";
-				document.body.appendChild(d);
+			var w=window,
+			    d=document,
+			    e=d.documentElement,
+			    b=d.getElementsByTagName('body')[0];
+			
+			var p = document.createElement("pre");
+			    p.id="debug";
+				document.body.appendChild(p);
 				
 			var c = function(){
-				_.gid("debug").innerHTML = _.dvp().w+" x "+_.dvp().h;
+				_.gid("debug").innerHTML = 
+					" win:  " + w.innerWidth + " × " + w.innerHeight + "\n" + 
+				    " doc:  " + e.clientWidth + " × " + e.clientHeight + "\n" + 
+					" body: " + b.clientWidth + " × " + b.clientHeight + "\n ";
+				
 			};
 			_.ael("resize", c);
 			c();
