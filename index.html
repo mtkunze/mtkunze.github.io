@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Matthias Kunze</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
         <script src="script/modernizr-2.6.2.min.js"></script>
 		
 		
-			<link rel="stylesheet/less" type="text/css" href="style/style.less" />
+			<link rel="stylesheet" type="text/css" href="style/style.css" />
 		
 		
 		<script>
@@ -621,68 +621,6 @@ console.log("!ok")
 		})();
 		</script>
 
-		
-		<!-- .............................................................................................................. -->
-		<script>
-		  less = {
-		    env: "development",
-			logLevel: 1
-		  };
-		</script>
-		<script src="script/less.js"></script>
-		
-		<script>
-		if (document.location.search.match(/watch/)) {
-				console.log("less watches" + (less.watch() ? "" : "not"));
-		}
-		</script>
-		
-		<script>
-		if (document.location.search.match(/debug/)) {
-			// show viewport dimensions
-			
-			var w=window,
-			    d=document,
-			    e=d.documentElement,
-			    b=d.getElementsByTagName('body')[0];
-			
-			var p = document.createElement("pre");
-			    p.id="debug";
-				document.body.appendChild(p);
-				
-			var c = function(){
-				_.gid("debug").innerHTML = 
-					" win:  " + w.innerWidth + " × " + w.innerHeight + "\n" + 
-				    " doc:  " + e.clientWidth + " × " + e.clientHeight + "\n" + 
-					" body: " + b.clientWidth + " × " + b.clientHeight + "\n ";
-				
-			};
-			_.ael("resize", c);
-			c();
-		}
-		
-		if (document.location.search.match(/validate/)) {
-			// some functions to chekc sonsistency of page ********************
-			
-			// check links
-			Array.prototype.forEach.call(document.querySelectorAll("section a"), function(a){
-				if (0 == a.childNodes.length || !a.childNodes[0].className || !a.childNodes[0].className.match(/lnk/)) {
-					a.title = "missing parent node .lnk";
-					a.style.backgroundColor = "red";
-				}
-			});
-			
-			// check layout
-			Array.prototype.forEach.call(document.querySelectorAll("section > *"), function(e){
-				if (-1 == e.className.split(" ").indexOf("inner") && !e.className.match(/title/)) {
-					e.appendChild(document.createTextNode("Missing class .inner"));
-					e.style.backgroundColor = "red";
-				}
-			});
-			
-		}
-		
-		</script>
 		
     </body>
 </html>
