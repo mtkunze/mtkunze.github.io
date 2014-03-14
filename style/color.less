@@ -1,5 +1,5 @@
 @text: #444;
-@back: #fcfcfc;
+@back: lighten(#f0ece8, 5%); //#fcfcfc;
 @high: saturate(lighten(rgb(34, 85, 170), 20%), 60%); //#00C8C8;
 
 .blackToText {
@@ -42,8 +42,12 @@
 
 @high: saturate(lighten(@inter, 10%), 60%);
 
+@text: #515259;
+@high: saturate(darken(#64a2e8, 5%), 40%);
+@high_alt: #63b65a;
+
 @high_dark: darken(@high, 30%);
 @high_bright: lighten(@high, 10%);
 
 @fadebg: 80%;
-@fadetitle: 30%;
+@fadetitle: 40%;

@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>{%if page.debug %}{{ page.title }} (debug){% else %}{{ page.title }}{% endif %}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -117,7 +117,7 @@
 			
 			<!-- photo, title, navigation with abstract if screen is large -->
 			<div id="welcome">
-				<h1 id="teasertitle"><strong>MA<span style="margin-left: -0.1em"/>TTHIAS</strong>KUNZE</h1>
+				<h1 id="teasertitle"><strong>MA<span style="margin-left: -0.1em"/>TTHIAS</strong> KUNZE</h1>
 				<h2 id="teasersubtitle"><span>BPM Expert &middot; IT Engineer</span></h2>
 			</div>
 			
@@ -447,7 +447,7 @@
 					<a href="http://hpi.uni-potsdam.de">HPI</a>, 
 					<a href="www.uniklinikum-jena.de/en/Wir_über_uns.html">Jena University Hospital</a>, 
 					<a href="https://www.signavio.com">Signavio</a></span>
-				<p>Healthcare organizations face the challenge to remain efficient with ever increasing complexity and cost-pressure of treatment procedures. In the <a href="http://pige-projekt.de"><span class="lnk">project</span></a>, we developed models to correlate treatment data with business process models in order to monitor and analyze treatment processes in realtime. A prototype has been developed that supports these aspects while maintaing high privacy and security standards.
+				<p>Healthcare organizations face the challenge to remain efficient with ever increasing complexity and cost-pressure of treatment procedures. In the <a href="http://pige-projekt.de"><span class="lnk">project</span></a>, we developed models to correlate treatment data with business process models in order to monitor and analyze treatment processes in realtime. A prototype has been developed that supports these aspects while maintaining high privacy and security standards.
 				</p>
 			</li>
 			
@@ -473,7 +473,7 @@
 					<a href="http://hpi.uni-potsdam.de">HPI</a>,
 					German Health Insurance</span>
 				<p>
-					In process choreographies, where business processes of different participants interact, monitoring and performance analysis is difficult, as delays may occur by waiting for certain responses. <br/> To correctly monitor service level agreements of a health insurance company, we developed the <a href="dx.doi.org/10.1007/978-3-642-37804-1_23"><span class="lnk">foundations</span></a> to support the monitoring processes interactions, particularly if only few events can be detected. A prototype has been developed validating the theoretical results.
+					In process choreographies, where business processes of different participants interact, monitoring and performance analysis is difficult, as delays may occur by waiting for certain responses. <br/> To correctly monitor service level agreements of a health insurance company, we developed the <a href="http://dx.doi.org/10.1007/978-3-642-37804-1_23"><span class="lnk">foundations</span></a> to support the monitoring processes interactions, particularly if only few events can be detected. A prototype has been developed validating the theoretical results.
 					
 				</p>
 			</li>
@@ -487,7 +487,7 @@
 					IT Service Provider</span>
 				<p>
 					Business process models cater the understanding of how organizations carry out their operations. However, they can also assist in controlling these operations, if they are orchestrated by software. <br/>
-					In a project with a German IT service provider, we developed a <a href="dx.doi.org/10.1007/978-3-642-21759-3_17"><span class="lnk">methodology</span></a> and prototype that incorporates data dependencies and a repository of services to configure business processes, ensure their consistency, and run them in a process engine.
+					In a project with a German IT service provider, we developed a <a href="http://dx.doi.org/10.1007/978-3-642-21759-3_17"><span class="lnk">methodology</span></a> and prototype that incorporates data dependencies and a repository of services to configure business processes, ensure their consistency, and run them in a process engine.
 				</p>
 			</li>
 			
@@ -612,7 +612,7 @@ console.log("!ok")
 					This page uses some icons from <a href="http://icons8.com/" target="_blank"><span class="lnk">Icons8</span></a> and 
 					is hosted by <a href="http://github.io/" target="_blank"><span class="lnk">GitHub</span></a>. 
 					The code is published under an open source license and available <a href="https://github.com/mtkunze/mtkunze.github.io"><span class="lnk">here</span></a>.
-					It makes extensive use of JavaScript and CSS; if you experience any problem, please file a <a href="https://github.com/mtkunze/mtkunze.github.io/issues"><span class="lnk">report</span></a>. 
+					It makes use of JavaScript and CSS; if you experience any problem, please file a <a href="https://github.com/mtkunze/mtkunze.github.io/issues"><span class="lnk">report</span></a>. 
 				</div>
 			</div>
 		</section>
@@ -658,7 +658,18 @@ console.log("!ok")
         			
 					// focus element is above upper half of visible area
 			        if(o - s < v/2) {
+						
+						// update window title
 			            document.title = TITLE + h.innerHTML.replace(/(<([^>]+)>)/ig,"");
+						
+						// update ULR for easier referencing, but not for the teaser as it is at the top anyway
+						try {
+							var hash = "#" + h.parentNode.id;
+							if ("#teaser" == hash) {
+								hash = "#";
+							}
+							history.replaceState({}, "", hash);
+						} catch(e){} // don't worry, if browser doesn't support history manipulation
 			        }
 			    });
 			};
@@ -693,6 +704,19 @@ console.log("!ok")
 				_.ael("load", margin);
 			}	
 		})();
+		</script>
+		<script>
+			// this avoids constant resizing on touch devices that hide/show
+			// the address bar when scrolling
+			(function(){
+				if(Modernizr.touch) {
+					_.ael("load", function(){
+						var t = _.gid("teaser");
+						t.style.height = Math.min(_.dvp().h, parseInt(window.getComputedStyle(t).height)) + "px";
+					});
+				}
+			})()
+			
 		</script>
 
 		{% if page.debug %}

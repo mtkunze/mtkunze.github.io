@@ -8,7 +8,7 @@
 html, body {
 	width: 100%;
 	height: 100%;
-	background-color: darken(@back,20%);
+	background-color: darken(desaturate(@back, 80%),20%);
 }
 
 section {
@@ -28,7 +28,6 @@ section > h1.title {
 	margin-top: .5em;
 	margin-bottom: .5em;
 	border-top: 1px solid fade(@text, @fadetitle - 15%);
-	
 	color: fade(@text, @fadetitle);
 	text-shadow: fade(@text, @fadetitle - 10%) 0px 0px 0.03em;
 }
@@ -281,7 +280,7 @@ nav {
 		margin-bottom: 0.5em;
 		
 		span {
-			background-color: fade(@high, 60%);
+			background-color: fade(@high, 70%);
 			.border-radius;
 			padding: 0.1em;
 		}
@@ -309,7 +308,7 @@ nav {
 		color: @back;
 	}
 
-	@media screen and (max-height: 530px) {
+	@media screen and (max-height: 500px) {
 		#scrolldown {
 			display: none;
 		}
@@ -806,6 +805,7 @@ nav {
 		input.ok + label,
 		textarea.ok + label {
 			color: @high_dark;
+			color: darken(@high_alt, 15%);
 		}
 	
 		input:focus + label,

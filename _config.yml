@@ -1,5 +1,5 @@
 name: mtkunze.github.io
 markdown: redcarpet
 pygments: true
-destination: ../mtkunze.github.io-master
-debug: true
+#destination: ../mtkunze.github.io-master
+destination: _site/
