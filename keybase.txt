@@ -1,0 +1,77 @@
+==================================================================
+https://keybase.io/mtkunze
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://www.matthias-kunze.info
+  * I am mtkunze (https://keybase.io/mtkunze) on keybase.
+  * I have a public key with fingerprint B4A6 869D 0F72 6778 992C  18B0 3ADA FAB9 8BC1 FC31
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "client": {
+            "name": "keybase.io node.js client",
+            "version": "0.4.0"
+        },
+        "key": {
+            "fingerprint": "b4a6869d0f726778992c18b03adafab98bc1fc31",
+            "host": "keybase.io",
+            "key_id": "3ADAFAB98BC1FC31",
+            "uid": "ce16419660249b30a3505a99b2e3bb00",
+            "username": "mtkunze"
+        },
+        "merkle_root": {
+            "ctime": 1401561003,
+            "hash": "552142a38be044981927ecbd0a7bca5205e7aee41fc016472053a7b363a3f8fdc60c64e568946c08eb42ae19fb39c471105e8d733e287e161cd65fb90a4e066a",
+            "seqno": 13560
+        },
+        "service": {
+            "hostname": "www.matthias-kunze.info",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1401561146,
+    "expire_in": 157680000,
+    "prev": "b7c0ad3986634c540039dff398e605bafc1992fc0091e04c681b8a9d5cde457e",
+    "seqno": 12,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG/MacGPG2 v2.0.22 (Darwin)
+Comment: GPGTools - https://gpgtools.org
+
+owFVUl1oHUUYvdcm0QSr0dooYmNcK4jG25mdn525IvWmJRAq9CEhpn25zMzO5m6S
+u3vv7ibxGmqFIq3VllhQxAeF0gfbPFSD0Fp/aGK1FLWtVAhVkP68pFIhEVGapujs
+JUK7L7v7zfnOnHO+b3L1qkxLNv/L0udvzSzD7PfXZKZ3b0d+wpKhW7PMW434OkjS
+r0CUtZW3hnVNiljn/LAjCF2dG4o7VjCd1piOYj8MDArkcA5YOzpTeNrs+cGgjiqR
+n3JZEgvKKHeB59jUcRjntoJMAiRc4QnJmVTQUwgaylIYJ3fcatU5i75rqqiwudBd
+6OKsaxPs3lTHj9YPlIYUQ04psDGXCAhEABGcS1sjKQFIgbGOViyVk+HR4FWdyi3r
+aHhEF6MwrHtWiZ8iIAaQUAgAMoJEXDI9hNgQ2wIxqQHGnEFuO1pJFwhHKkFsQLQj
+tMbGBzBaHFNA5ghRJJDHPFdRoCjWhDKOqQJMS8OmIfck4go7EBoC5joIaZs5xg1U
+LiWe5EBgDSgVxkGsq0FoxCFCwY70NxrzlU5lp6GteBsfH8+VRZKUfBE/V7eZ8wMv
+TbEShUmowhEDKiVJJZ/aT2rHKvUuLYsrfEXpB66Z3u3jhQZ6ZzQQ005Lv1LxI130
+UwRxKAPmSe/RY+nMHQWEizijFGFFsAmTu55nCpoCIoWnoFkDkxbg0ESqKIOSCe4S
+5WpMHH2bYdsIFYOGM/YHA5GMRmZ0b2Yfa8hkWzJNjXelC5xpaW79f6uby3ffag+O
+P3+9Z/99xx459XLPrSE4NPLjwiez7ZF3+oOfv7beLj/UdfnPvU9Mgfba6GyCctu6
+c8e/e/zvmfUv/H7w40ONfU1nBm48+voB742/Lj55tbf/7LbGLRNP35z/7Z1qw4E5
+t+PGxtNbCTkxNV2ptWaO7LrEzuV3FYZ2nxr4astc/3z+3EfVw6vywbvXW3/65mBh
+84XmK9unl/64ePiBscXV768pVbe3Td3c2PvFyV+zEzOH1vV7J79c/HbgqWr46dE9
+lyqf3V99794Pl0uXW9s6K+v6dy6WZq2GfdPLbS+uOb+vZ/LCswsvbegrit07f3jm
+n+5/75lf6nt4mvQ0bX1t7ujSwuR+78EzpbVr9/wH
+=gfI8
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/mtkunze
+
+==================================================================
