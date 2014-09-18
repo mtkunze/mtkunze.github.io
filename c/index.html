@@ -1,1 +1,224 @@
-vcf
+<!DOCTYPE html lang="en">
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Matthias Kunze</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=600px,initial-scale=0.9">
+		<script src="modernizr-c.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+		// detect preserve3d required for parallax effect
+		(function(Modernizr, win){
+		    Modernizr.addTest('preserve3d', function () {
+
+		        var prop = Modernizr.prefixed('transformStyle');
+		        var val = 'preserve-3d';
+		        var computedStyle;
+		        if(!prop) return false;
+
+		        prop = prop.replace(/([A-Z])/g, function(str,m1){ return '-' + m1.toLowerCase(); }).replace(/^ms-/,'-ms-');
+
+		        Modernizr.testStyles('#modernizr{' + prop + ':' + val + ';}', function (el, rule) {
+		            computedStyle = win.getComputedStyle ? getComputedStyle(el, null).getPropertyValue(prop) : '';
+		        });
+
+		        return (computedStyle === val);
+		    });
+		}(Modernizr, window));
+		</script>
+		
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		
+		<script>
+		var _ = (function(window){
+			return {
+				/**
+				 * get element by id
+				 */
+				gid: function(x) {
+					return document.getElementById(x);
+				},
+				/**
+				 * Add event listener to window
+				 */
+				ael: function(args){
+					if(window.addEventListener) {
+						window.addEventListener.apply(window, arguments);
+					} else {
+						window.attachEvent.apply(window, arguments);
+					}
+				},
+
+				/**
+				 * returns the dimensions of the viewport
+				 */
+				dvp: function() {
+					var w=window,d=document,e=d.documentElement,g=d.getElementsByTagName('body')[0],
+					    x=w.innerWidth||e.clientWidth||g.clientWidth,
+						y=w.innerHeight||e.clientHeight||g.clientHeight;
+					return {w:x, h:y}
+				},
+				
+				/**
+				 * is number
+				 */
+				isN: function(x){
+					return "number" == typeof(x);
+				},
+				
+				encode: function (string){
+					return string.split("").map(function(i){return (i.charCodeAt(0)+13)}).join("|");
+
+				},
+
+				decode: function (string) {
+					return string.split("|").map(function(i){return String.fromCharCode(parseInt(i) - 13)}).join("");
+				}
+			}
+		})(window);
+		
+		</script>
+
+    </head>
+    <body class="landscape">
+		<!--[if lt IE 9]>
+		  <script>
+		    document.createElement("header" );
+		    document.createElement("footer" );
+		    document.createElement("section"); 
+		    document.createElement("aside"  );
+		    document.createElement("nav"    );
+		    document.createElement("article"); 
+		    document.createElement("hgroup" ); 
+		    document.createElement("time"   );
+		  </script>
+		  <noscript>
+		     <strong>Warning!</strong>
+		     Because your browser does not support HTML5, some elements are simulated using JScript.
+		     Unfortunately your browser has disabled scripting. Please enable it in order to display this page.
+		  </noscript>
+		<![endif]-->
+		<div id="wrapper">
+		<div id="card" class="front">
+			<section class="back">
+				<div id="photo"><div>
+					<img id="photourl" src="photo.jpg">
+				</div></div>
+				
+				<h3><em>Matthias</em> Kunze
+				<small title="M. Sc. Software Engineering"><em>M. Sc.</em> Software Engineering</small>
+				<small title="Dr. rer. nat. Business Process Technology"><em>Dr. rer. nat.</em> Business Process Techn.</small>
+				
+				</h3>
+				
+				<ul id="connect">
+					<li><a class="xing" href="http://www.xing.com/profile/Matthias_Kunze20">Connect with me on <em>XING</em></a></li>
+					<li><a class="linkedin" href="http://www.linkedin.com/profile/view?id=47470144">Connect with me on <em>LinkedIn</em></a></li>
+					<li><a class="twitter" href="http://www.twitter.com/matthias_k">Follow my musings on <em>Twitter</em></a></li>
+					<li><a class="flickr" href="http://flickr.com/photos/mtkunze">Watch my photos on <em>flickr</em></a></li>
+					<li><a class="keybase" href="http://keybase.io/mtkunze">Proof my identity on <em>Keybase</em></a></li>
+				</ul>			
+			</section>
+			
+			<section class="front">
+				<h1 data-title="Dr.">
+					<em>Matthias</em> Kunze
+					<small>BPM Expert &middot; IT Engineer</small>
+				</h1>
+			
+				<ul id="contact">
+					<li><a title="Click to visit my homepage" href="http://www.matthias-kunze.info">www.matthias-kunze.info</a></li>
+					<li><a id="email" title="Click to send me an e-mail" href="#">(please enable javascript)</a></li>
+					<li><a id="phone" title="Click to call me" href="#">(please enable javascript)</a></li>
+				</ul>
+			</section>
+			
+			<footer>
+				<a href="" filename="matthiaskunze.vcf" id="vcard"></a>
+			</footer>
+		</div>
+		</div>
+		<a href="#" id="left" onclick="flip()">&lang;</a>
+		<a href="#" id="right" onclick="flip()">&rang;</a>
+		<div id="touchhint"></div>
+		
+		<script>
+		
+		var email = "112|124|123|123|114|112|129|77|122|110|129|129|117|118|110|128|58|120|130|123|135|114|59|118|123|115|124";
+		var phone = "56|65|70|45|53|61|54|45|62|68|64|45|60|45|64|68|69|64|45|68|61|69";
+		
+		_.gid("email").href="mailto:" + _.decode(email);
+		_.gid("email").innerHTML=_.decode(email);
+		
+		_.gid("phone").href="tel://" + _.decode(phone).replace("(0)","").replace(/[^0-9\+]/g,"");
+		_.gid("phone").innerHTML=_.decode(phone);
+		
+		var vcf = 
+		"BEGIN:VCARD\n"+
+		"VERSION:3.0\n"+
+		"N:Kunze;Matthias;;Dr. rer. nat.;\n"+
+		"FN:Matthias Kunze\n"+
+		"PHOTO;VALUE=URL;TYPE=JPEG:{{photourl}}\n"+
+		"TEL;TYPE=CELL:{{phone}}\n"+
+		"EMAIL:{{email}}\n"+
+		"URL:http://www.matthias-kunze.info\n"+
+		"KEY;TYPE=PGP:https://keybase.io/mtkunze/key.asc\n"+
+		"REV:20140912T000000Z\n"+
+		"END:VCARD\n";
+		
+		_.gid("vcard").href = "data:text/vcard;charset=utf-8," + 
+			encodeURIComponent(vcf
+				.replace("{{photourl}}", _.gid("photourl").src)
+				.replace("{{email}}", _.decode(email))
+				.replace("{{phone}}", _.decode(phone).replace("(0)","").replace(/( |\/)+/g,"-")));
+		
+		</script>
+		
+		<script>
+			var c = _.gid("card"),
+				p = c.className;
+				
+			function flip(){
+				c.className = p = ("front" == p ? "back" : "front");
+			}
+		</script>
+		
+		<script>
+		(function(){ // scope isolation
+			var x = y = null;
+		
+			_.ael('touchstart', function(e){
+				x = e.changedTouches[0].pageX;
+				y = e.changedTouches[0].pageY;
+			});
+		
+			_.ael('touchend', function(e) {
+				var dx = Math.abs(x - e.changedTouches[0].pageX),
+				    dy = Math.abs(y - e.changedTouches[0].pageY);
+				
+				if (dx > dy) {// moved more horizontal than vertical
+					window.setTimeout(flip, 15);
+				}
+			});
+	
+			function is_touch_device() {
+				return !!('ontouchstart' in window);
+			}
+		
+			_.ael("load", function(){
+				var c = "touchhint";
+			
+				if (is_touch_device()) {
+					document.body.className = document.body.className + " " + c;
+				
+					window.setTimeout(function(){
+						document.body.className = document.body.className.replace(new RegExp(c), "");
+					}, 1500);
+				}
+			})
+		})();
+		
+		</script>
+    </body>
+</html>
