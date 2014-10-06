@@ -1,0 +1,28 @@
+.hireme .parallax-back {
+	background-image: url(../img/hireme/mb_s.jpg);
+}
+
+@media screen and (min-width: @lap) {
+	.hireme .parallax-back {
+		background-image: url(../img/hireme/mb_m.jpg);
+	}	
+}
+
+@media screen and (min-width: @desk) {
+	.hireme .parallax-back {
+		background-image: url(../img/hireme/mb_l.jpg);
+	}	
+}
+
+#hireme {
+	border-color: @hireme;
+
+	.title span {
+		color: @hireme;
+		text-shadow: 0 0 1px @hireme;
+	}
+	.title small {
+		color: @back;
+		background-color: @hireme;
+	}	
+}

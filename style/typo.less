@@ -1,15 +1,16 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:400,300,100);
 
-@todo1: fade(@high, 70%);
-//@todo2: fade(@high_bright, 80%);
-@todo2: fade(@high_alt, 80%);
+@headerfont: 'Lato', 'helvetica neue', sans-serif;
+@textfont: @headerfont;
+
 
 /********* GENERAL FONT SELECTION ********************************************/
 
-body, input, textarea, label {	
-	font-family: 'Lato', 'helvetica neue', sans-serif;
+body, input, textarea, label, table, td {	
+	font-family: @textfont;
 	font-weight: 300;
 	font-size: @fontsize;
-	line-height: 150%;
+	line-height: 1.5;
 	color: @text;
 	
 	strong, .bold {
@@ -23,15 +24,25 @@ body, input, textarea, label {
 section h1, section h2, section h3 {
 //	font-family: 'Lato', 'helvetica neue', sans-serif;
 	font-weight: 100;
+	
+	small {
+		display: block;
+		font-size: 50%;
+		font-weight: 300;
+	}
 }
 
-section h1 {font-size: 2.3em}
-section h2 {font-size: 1.7em}
+section h1 {font-size: 4em}
+section h2 {font-size: 3em}
 section h3,
 nav h3 {
-	font-size: 1.2em; 
+	font-size: 2em; 
 	text-transform: uppercase; 
 	font-weight: 300
+}
+
+.title {
+	text-align: center;
 }
 	
 section h3 {
@@ -65,7 +76,6 @@ section {
 	a, a.lnk {
 		position: relative;
 		text-decoration: none;
-		color: @todo1;
 		z-index: 5;
 	}
 	
@@ -90,7 +100,7 @@ section {
 	}
 	
 	a .lnk:before, a:hover .lnk:after {
-		background-color: fadeout(@todo1, 30%);
+//		background-color: fadeout(@todo1, 30%);
 	
 		content: " ";
 		position: absolute;
@@ -117,7 +127,7 @@ section {
 	}
 
 	a:hover .lnk:after {
-		background-color: fadeout(@todo2, 30%);
+//		background-color: fadeout(@todo2, 30%);
 		z-index: -2;
 	
 		-webkit-transform: rotate(3deg);

@@ -1,0 +1,42 @@
+ideas
+
+section titles 
+- stick to top of screen (on desktop) 
+- get smaller the more is scrolled up, unto the minimum size
+- use grey for subtitles
+- show submenus at the right of section titles (cf. https://www.apple.com/osx/preview/apps/)
+
+section background
+- vertical color transition to create distinct edges at the top of a section (cf. https://www.apple.com/osx/preview/apps/)
+- parallax scrolling background image as section separators 
+  - use css parallax
+  - less than 50% of screen height visible
+  
+- on mobile/touch make each section a separate pane (small distance to border and each other with drop shadow, cf. https://developer.android.com/preview/material/index.html)
+
+more colorful -- less serious
+
+
+headshot-photo (from xing) for list of qualifications in #hireme on hand, see headshot.png
+
+-------------------------------------------------------------------------------
+open tabs
+
+== COLORS
+http://design-seeds.com/index.php/search/category/spring/P72
+http://design-seeds.com/index.php/home/entry/merry-christmas
+http://design-seeds.com/index.php/home/entry/mental-vacation38
+http://design-seeds.com/index.php/home/entry/cinco-color1
+http://design-seeds.com/index.php/home/entry/underwater-hues4
+http://www.f91w.com/mindfulness/wp-content/themes/f91w/img/background.png
+http://middlemojo.com/
+https://www.corephp.com/blog/best-museum-websites-you-would-like-to-visit/hirshhorn/
+http://www.kikk.be/2014/about-us.htm?lng=en
+http://www.shutterstock.com/pic.mhtml?id=109951958
+http://www.shutterstock.com/pic.mhtml?id=163800305
+
+== LAYOUTS
+mustified.com/2012/05/11/20-inspiring-multicolor-websites/
+http://www.webdesignerdepot.com/2013/06/30-fresh-wordpress-business-themes/
+http://kopatheme.com/demo/customize-responsive-wordpress-theme/
+http://loveisours.com/

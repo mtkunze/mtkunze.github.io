@@ -1,0 +1,33 @@
+// TODO looks awfull
+// .projects .parallax-back {
+// 	background-image: url(../img/projects/rock_s.jpg);
+// }
+//
+// @media screen and (min-width: @lap) {
+	.projects .parallax-back {
+		background-image: url(../img/projects/rock_m.jpg);
+	}	
+// }
+
+@media screen and (min-width: @desk) {
+	.projects .parallax-back {
+		background-image: url(../img/projects/rock_l.jpg);
+	}	
+}
+
+#projects {
+	border-color: @projects;
+
+	.title span {
+		color: @projects;
+		text-shadow: 
+			0 0 1px @projects;
+			// 0 0 7px @back, 0 0 7px @back,
+			// 0 0 7px @back, 0 0 7px @back,
+			// 0 0 7px @back, 0 0 7px @back
+	}
+	.title small {
+		color: @back;
+		background-color: @projects;
+	}	
+}

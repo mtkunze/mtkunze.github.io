@@ -1,7 +1,7 @@
 @hand: 400px;
 @lap:  550px;
 @desk: 900px;
-@maxwidth: 50em;
+@maxwidth: 60em;
 
 /*
 // Debug 
@@ -44,6 +44,10 @@ section > .inner {
 }
 
 // --------------------------------------------------------------- BASIC layout
+section {
+	clear: both;
+}
+
 section > .inner {
 	// what whas that good for?
 	// * {
@@ -66,8 +70,9 @@ hr.clr { // strangley, safari needs this
 }
 
 // --------------------------------------------------------- HAND sized devices
-section > .inner,
-section h1.title {
+section > .inner
+//, section h1.title 
+{
 	margin-left: auto;
 	margin-right: auto;
 	width: 80%;
@@ -76,15 +81,17 @@ section h1.title {
 // the following provides for a seemless transition from 80% to 95% width on
 // narrow devices
 @media screen and (max-width: (@hand/.8)) {
-	section > .inner,
-	section h1.title {
+	section > .inner
+//	, section h1.title 
+	{
 		width: @hand;
 	}
 }
 
 @media screen and (max-width: (@hand/.95)) {
-	section > .inner,
-	section h1.title {
+	section > .inner
+//	, section h1.title 
+	{
 		width: 95%;
 	}
 }
@@ -106,7 +113,7 @@ section > .inner {
 
 	section > .inner {
 		// 2-column layout
-		@w: 47.5%;
+		@w: 45%;
 		@m: ((100% - 2 * @w) / 2);
 
 		.col, .col2, .col3 {
@@ -130,14 +137,15 @@ section > .inner {
 
 // ------------------------------------------------------ DESKTOP sized devices
 @media screen and (min-width: @desk){
-	section > .inner,
-	section h1.title {
+	section > .inner
+//	, section h1.title 
+	{
 		max-width: unit(@maxwidth * unit(@fontsize), px); // 60em, independent of fontsize of h1
 	}
 	
 	section > .inner {
 		// 3 column layout
-		@w: 32%;
+		@w: 28%;
 		@m: ((100% - 3*@w)/ 3);
 		
 		.col, .col2, .col3 {

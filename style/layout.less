@@ -1,5 +1,3 @@
-@width: 70em;
-@maxwidth: 33.33em;
 @fontsize: 16px;
 @leftspace: 10%;
 
@@ -11,857 +9,111 @@ html, body {
 	background-color: darken(desaturate(@back, 80%),20%);
 }
 
+/******** SECTIONS ***********************************************************/
+
 section {
-	background-color: @back;
-	padding: 0.5em 0 1em 0;
-}
-
-section > h1.title {
-	font-size: 4em;
-	line-height: 100%;
-	font-weight: 300;
-	text-align: center;
-
 	position: relative;
-	margin-left: -.07em;
-	padding-top: .5em;
-	margin-top: .5em;
-	margin-bottom: .5em;
-	border-top: 1px solid fade(@text, @fadetitle - 15%);
-	color: fade(@text, @fadetitle);
-	text-shadow: fade(@text, @fadetitle - 10%) 0px 0px 0.03em;
-}
-
-@media screen and (max-width: @maxwidth) {
-	section > h1.title {
-		font-size: 33px;
-	}
-}
-
-// stacking
-section {
-	z-index: 10;
-}
-
-#navigation, nav {
-	z-index: 20;
-}
-
-#teaser {
-	z-index: 30;
-}
-
-/******** ICONS **************************************************************/
-
-@icon_dim: 20px;
-.icon {
-	@dim: @icon_dim;
-	@pad: 7px;
-	
-	position: relative;
-	display: inline-block;
-	width: @dim;
-	height: @dim;
-	padding: @pad;
-	margin: @pad/2 @pad/2 @pad/2 0;
-	vertical-align: middle;
-	white-space: pre-wrap;
-	
-	
-	border: 1px solid fade(@back, 50%);
-	border-radius: @dim+2*@pad;
-	background: fade(@back, 15%) none no-repeat center center scroll;
-	
-	transition: border .5s ease,
-				background-color .5s ease;
-}
-
-a:hover .icon {
-	background-color: fade(@high, 60%);
-	border-color: fade(@high, 60%);
-}
-
-.icon.inv {
-	border-color: fade(@text, 50%);
-	background-color: fade(@text, 15%);
-}
-
-.icon.about{
-	background-image: %(~"url(/img/about-%a.png)", unit(@icon_dim));
-}
-.icon.hire{
-	background-image: %(~"url(/img/hire-%a.png)", unit(@icon_dim));
-}
-.icon.curriculum{
-	background-image: %(~"url(/img/cv-%a.png)", unit(@icon_dim));
-}
-.icon.projects{
-	background-image:%(~"url(/img/projects-%a.png)", unit(@icon_dim));
-}
-	
-/******** NAVIGATION *********************************************************/
-
-nav {
-	position: fixed;	
-	bottom: 0;
-	width: 100%;
-	height: auto;
-}
-
-.touch nav { 
-	// on touch devices, where this is shown always, it should be on top
-	top: 0px;
-	bottom: auto;
-}
-
-// nav section#navigation
-#navigation {
-	position: relative;
-	bottom: 0px;
-	left:0;
-	background-color: fade(@text, 70%);
-	border-top: 1px solid @text, 70%;
-	padding: 5px 0;
-	transition: top 0.3s ease, bottom 0.3s ease;
-}
-
-#navigation ul li {
-	float: left;
-	width: 25%;
-	text-align: center;
-	vertical-align: top;
-	line-height: 0;
-	a {
-		color: @back; 
-		transition: color .5s ease;
-	}
-	
-	.icon {
-		vertical-align: middle;
-		margin: 5px 1em 5px 0;
-	}
-	
-	a:hover {
-		color: @high_bright;
-	}
-	
-}
-
-#navigation ul li.up {
-	position: absolute;
-	right: 10px;
-	margin-top: 5px;
-	width: auto;
-	float: none;
-	transition: top 0.3s ease;
-}
-
-// transition delays facilitate fidning the navigation buttons
-.no-touch #navigation {
-	bottom: -100px;
-	
-	ul li.up {
-		top: -100px;
-		-webkit-transition-delay: .75s; 
-	        	transition-delay: .75s;
-	}
-	-webkit-transition-delay: .75s; 
-        	transition-delay: .75s;
-}
-
-// must only animate if mouseover is available
-.no-touch #navigation:hover,
-.touch {
-	-webkit-transition-delay: 0s; 
-        	transition-delay: 0s;
-	bottom:0;
-	ul li.up {
-		
-		-webkit-transition-delay: 0s; 
-	        	transition-delay: 0s;
-		top: 0;
-	}
-}
-.touch {
-	ul li .icon {
-		margin-right: 0;
-	}
-	ul li.up {
-		display: none;
-	}
-}
-
-@media screen and (max-width: 650px){
-	#navigation .caption {
-		display: none;
-	}
-	
-	.no-touch #navigation ul li {
-		width: 22.5%;
-	}
-	.no-touch #navigation ul li.up {
-		width: auto;
-	}
-}
-
-
-/******** TEASER *************************************************************/
-
-#teaser {
+	display: block;
 	margin: 0;
 	padding: 0;
+	
+	background-color: @back;
+	
+	// gradient to separate section
+	background-image: linear-gradient(
+		darken(@back, 0%), 
+		darken(@back, 3%) 30em); // 80vh would be better, but is not yet well supported
+		
+	box-shadow: inset 0 -100px 105px -170px fade(@text,50%);
+}
+
+section {
+	background-image: none;
+	// box-shadow:
+	// 	inset 0 -60em 20em -20em darken(@back, 3%),
+	// 	inset 0 5px 15px -10px darken(@back, 20%);
+	// border-bottom: 1px solid darken(@back, 10%);
+}
+
+section * {
+	z-index: 5;
+}
+
+.inner {
+//	max-width: @width; -- set in grid.less
+	margin: 0 auto;
+	padding: 2em 0;
+}
+
+
+// -- parallax basic settings -------------------------------------------------
+
+@parallaxBackGroundSize: 40rem; 
+// TODO convert to px, em will break
+// TODO this could also be 40vh 
+
+.parallax {
 	position: relative;
-	width: 100%;
-	height: 100%;
+	padding-top: @parallaxBackGroundSize;
+	overflow: hidden;
 	
-	background-color: @text;
-	box-shadow: 0 3px 5px -3px @text;
-	
-	background: @text url(/img/matthias.jpg) no-repeat center top scroll; 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-}
-
-.no-touch #teaser {
-	min-width: @hand;
-}
-	
-	#welcome {
-		position: absolute;
-		margin-left: 10%;
-		bottom: 50%;	
-	}
-	
-	#hello, #teasertitle, #teasersubtitle {
-		position: relative;
-		color: @back;
-		
-	}
-	
-	#hello {
-		font-size: 1.8em;
-		line-height: 2.5em;
-		margin-left: 0.1em;
-	}
-	
-	#teasertitle {
-		font-size: 4em;
-		text-transform: uppercase;
-//		text-shadow: darken(@back, 5%) 0px 0px 0.03em;
-	
-		strong {
-			font-weight: 300;
-		}
-	}
-	
-	#teasertitle:before {
-		content: "Dr.";
-		position: absolute;
-		right: 100%;
-		margin-right: .2em;
-		color: transparent;
-		transition: color .3s ease;
-		text-shadow: none;
-	}
-	
-	#teasertitle:hover:before {
-		color: darken(@back, 40%);
-		transition: color .3s ease;
-	}
-	
-	#teasersubtitle {
-		font-size: 2.3em;
-		font-weight: 100;
-		text-transform: uppercase;
-		margin-top: 1em;
-		letter-spacing: 0.07em;
-		margin-bottom: 0.5em;
-		
-		span {
-			background-color: fade(@high, 70%);
-			.border-radius;
-			padding: 0.1em;
-		}
-	}
-	
-	#scrolldown {
-		position: absolute;
-		width: 100%;
-		bottom: 20px;
-		text-align: center;
-		
-		.icon {
-			position: relative;
-			cursor: default;
-		}
-	}
-	
-	#scrolldown:hover:after {
-		position: absolute;
-		left: 50%;
-		margin-left: 2em;
-		line-height: 2em;
-		vertical-align: middle;
-		content: "Scroll down for more.";
-		color: @back;
-	}
-
-	@media screen and (max-height: 500px) {
-		#scrolldown {
-			display: none;
-		}
-	}
-
-/* problems with scaling text size and :before alignment */
-	
-	// still looks weird on landscape iphone 4 (low resolution)
-@media screen and (max-width: 500px) {
-	
-	#teaser {
-		background-image: url(/img/matthias_small.jpg); 
-	}
-	
-	#welcome {
-		width: 100%;
-		margin-left: 0;
-		margin-right: 0;
-		text-align: center;
-		top: 70%;
-		bottom: default;
-	}
-	
-	#hello {
-		display: none;
-	}
-	
-	#teasertitle {
-		font-size: 33.3px; // sync with javascript
-	}
-	
-	#teasersubtitle {
-		font-size: 20.83px; // sync with javascript
-	}
-	
-	#teasertitle:before {
-		content: "";
-	}
-}
-
-// show scroll down icon
-
-#teasernav {
-	display: none;
-}
-
-@media screen and (min-height: 500px) and (min-width: 501px) {
-	#teasernav {
-		display: block;
-		position: absolute;
-		width: 25em;
-		top: 50%;
-		left: 10%;
-		margin-top: 2em;		
-		
-		ul {
-			margin:0;
-			padding:0;
-			list-style-type: none;
-			
-			li {
-				
-				margin:0;
-				padding:0;
-				position: static;
-				display: inline;
-				margin: 0; //.7em 0em .3em;
-				padding-right: 1em; // allows mouse to move over abstract
-	
-				text-decoration: none;
-				color: average(@text, @back);
-
-				img {
-//					padding: 4px;
-//					.border-radius;
-//					border: 1px solid transparent;
-					transition: border-color .5s ease,
-								background-color .5s ease;
-					// all suffers from some jumping
-		
-				}
-
-			    .abstract {
-					position: absolute;
-					top: 500%;
-					left: 0;
-					padding: 0.5em 5px; // padding-left must match with boxshadow of contents (below)
-
-					min-width: 268px;
-					height: 100%;
-					text-align: left;
-
-					opacity: 0;
-					transition: top .3s ease,
-								opacity .4s ease;
-					.border-radius;
-		
-					p, h3 {
-						// for ragged background
-						display: inline;
-						background-color: @back;
-						color: @text;
-						line-height: 1.5em;
-						padding: .1em 0;
-						margin: .5em 0 0 0;
-			
-						box-shadow:  5px 0 0 @back, 
-									-5px 0 0 @back,
-									 5px 2px 0 @back, 
-									-5px 2px 0 @back, ;
-						// from http://css-tricks.com/multi-line-padded-text/
-						// use px to be independent of fontsize
-					}
-				}
-			}
-		}
-	}
-
-
-	#teasernav:after {
-		// IMPORTANT -- required to fix proper hiding, if mouse leaves navigation 
-		// below abstracts (catches hover state)
-		content: " ";
-		position: absolute;
-		width: 100%;
-		height: 1000%; // should be safe
-		margin-top: -1em;	
-	}
-	
-	#teasernav ul li:hover, 
-	#teasernav ul li:focus, 
-	#teasernav ul li.active {
-
-		img {
-//			background-color: fade(@high, 60%);
-//			-webkit-transform: rotate(-5deg);
-//			   -moz-transform: rotate(-5deg);
-//			        transform: rotate(-5deg);	
-		}
-	
-		.abstract {
-			top: 50px;
-			opacity: .7;
-			// TODO fadeout
-			transition: top .4s ease,
-						opacity .3s ease;
-		}
-	}
-}
-
-/******** ABOUT ME ***********************************************************/
-
-#about {
-	h1.title {
-		border-width:0;
-	}
-}
-#twelvemonths {
-	float: right;
-	
-	h3 {
-		text-align: center;
-	}
-}
-
-@media screen and (min-width: @lap) and (max-width: (unit(unit(@desk)-1,px))) {
-	#twelvemonths {
-		width: 100%;
-		
-		figure {
-			@w: 32%;
-			@m: ((100% - 3*@w)/ 3);
-		
-			float: left;
-			margin-left: (@m/2);
-			margin-right: (@m/2);
-			width: @w;
-		}
-	}
-}
-
-/******** HIRE ME ************************************************************/
-
-#hireme {
-	.rating {
-		text-align: right;
-		font-size: .9em; 
-		color: @high_dark;
-	}
-}
-
-@media screen and (max-width: unit((unit(@desk)-1),px)) {
-	#hireme {
-		
-		.rating {
-			float: right;
-			clear: right;
-		}
-		
-		h3 {
-			width: auto;
-		}
-	}
-}
-
-/******** CURRICULUM *********************************************************/
-
-@cv-border: mix(@high_dark, @back, 40%);
-@cv-border: mix(@text, @back, 40%);
-
-// basic layout for narrow columns
-#cv {
-		
-	.learn, .practice {
-		position: relative;
-		padding-top: 3em;
-		margin-bottom: 3em;
-	}
-	
-	.time {
+	.parallax-back {
 		position: absolute;
 		top: 0;
-		display: block;
-		text-align: right;
+		left: 0;
 		width: 100%;
-	}
-	
-	.learn .time:before,
-	.practice .time:before {
-		float: right;
-		width: 40px;
-		height: 40px;
-		content: " ";
-		background: url(/img/curriculum/diploma2-26.png) no-repeat top right scroll;
-		opacity: 0.5;
-	}
-	
-	.practice .time:before {
-		background-image: url(/img/curriculum/bill-26.png)
-	}
-	
-	.learn .time:after,
-	.practice .time:after {
-		position:absolute;
-		left:0;
-		top:0;
-		padding: .5em;
-		.border-radius;
-
-		content: "Education";
-		background-color: @high_alt; //@text;
-		color: @back;
-		opacity: 0;
+		height:	105vh; 
+			// must be slightly larger than the viewport 
+			// TODO is this properly supported?
+			// TODO this must be reduced for palm and hand, to allow seeing the whole picture			
+			// TODO this could also be 50vh;
 		
-		transition: opacity .5s ease;
+		background: @back url() no-repeat;
+		background-position: center center;
+		background-size: cover;
 	}
-	
-	.practice .time:after {
-		content: "Experience";
-	}
-	
-	.learn:hover .time:after,
-	.practice:hover .time:after {
-		opacity: 0.8;
-	}
-	
-	h3 {
-		position: relative;
-		border-top: 1px solid @cv-border;
-//		background-color: fade(@high_bright, 10%);
-		padding: 0.2em 0 0.2em 0;
-	}
-	
-	h3:before, h3:after {
-		content: " ";
-		position: absolute;
-		width: 0;
-		height: 0;
-		border: 6px solid @cv-border;
-		border-color: transparent transparent @cv-border transparent;
-		top: -12px;
-		right: 10px;
-	}
-	
-	h3:after {
-		border-color: transparent transparent @back transparent;
-		top: -11px;
-		right: 10px;
+
+	.parallax-base, .parallax-base .inner {
+		position: relative; 
 	}
 }
 
-@media screen and (min-width: @desk){
-	#cv {
-		@w: 32%;
-		@m: ((100% - 3*@w)/ 3);
-
-		.learn, .practice {
-			width: 2*@w;
-			margin: 0 @m/2 2em @m/2;
-			
-			padding-top: 0;
-			padding-right: @m;
-			
-			
-			border-right: 1px solid @cv-border;
-			
-			h3 {
-				border-top: none;
-			}
-			h3:before, h3:after {
-				display: none;
-			}
-		}
-		
-		.learn:before, .practice:before,
-		.learn:after, .practice:after {
-			content: " ";
-			position: absolute;
-			width: 0;
-			height: 0;
-			border: 6px solid @cv-border;
-			border-color: transparent transparent transparent @cv-border;
-			top: 12px;
-			right: -12px;
-		}
+@media screen and (max-width: @desk) {
+	.parallax {
+		padding-top: 40vh; 
+	}
 	
-		.learn:after, .practice:after {
-			border-color: transparent transparent transparent @back;
-			top: 12px;
-			right: -11px;
-		}
-		
-		.location, .time {
-			width: 50% - 4*@m; // @w + 3*@m/2;
-			left: 100%; //2*@w + 5*@m/2;
-			margin-left: 4*@m;
-			text-align: left;
-		}
-		
-		.learn .time:after,
-		.practice .time:after {
-			position: absolute;
-			top: 100%;
-			margin-top: .5em;
-		}
+	.parallax .parallax-back {
+		height: 50vh;
 	}
 }
 
-/******** PROJECTS ***********************************************************/
-
-@media screen and (min-width: @lap) and (max-width: unit((unit(@desk)-1),px)) {
-	// 2 column layout -- sync with gird.less
-	// break after 2 columns 
-	#projects li.project:nth-child(2n+3) {
-		clear: left;
-	}
+.parallax {
+	border-top: 1px solid @text;
+}
+.parallax-base {
+	border-top: 3px solid @text;
 }
 
-@media screen and (min-width: @desk) {
-	// 3 column layout -- sync with grid.less
-	// break after 3 columns
-	#projects li.project:nth-child(3n+4) {
-		clear: left;
-	}
-}
-
-#projects {
+section.parallax-base .title {
+	position: absolute;
+	top: -4em;
+	left: 0;
 	
-	ul#projectsinner {
-		padding: 0;
-		list-style-type: none;
-	}
-	li.project {		
-		position: relative;
-		min-height: 10em;
-		margin-top: 2em;
-	}
+	text-align: left;
+	padding: 0em 2.66667%; // TODO align with @m from grid.less
+	line-height: 1.2;
 	
-	@lw: 40px;
-	@lh: @lw;
-	
-	i.logo {
-		position: relative;
-		display: block;
-		width: @lw;
-		height: @lh;
-		margin-bottom: -.4em;
-		background: @high_alt url(/img/projects/logos.png) no-repeat bottom right scroll;
-	}
-
-	.project i.logo:before {
-		background-color: transparent;
-		position: absolute;
-		content: " ";
-		width: 100%;
-		height: 100%;
-		top:0;
-		left:0;
-		.border-radius;
-		transition: background-color .3s ease;
-	}
-	
-	.project:hover i.logo:before {
-		background-color: fade(@high_alt, 25%);
-	}
-	
-	@media screen and (max-width: @lap) {
-		i.logo {
-			display: inline;
-			float: right;
-			margin: .7em .5em 0 0;
-		}
-	}
-	
-	i.logo.get{
-		background-position: -1*@lw -0*@lh;
-	}
-	i.logo.bpmai{
-		background-position: -0*@lw -0*@lh;
-	}
-	i.logo.pige{
-		background-position: -0*@lw -2*@lh;
-	}
-	i.logo.interchange{
-		background-position: -2*@lw -0*@lh;
-	}
-	i.logo.monitoring{
-		background-position: -1*@lw -1*@lh;
-	}
-	i.logo.automation{
-		background-position: -1*@lw -2*@lh;
-	}
-	i.logo.modeling{
-		background-position: -0*@lw -1*@lh;
-	}
-	i.logo.oryx{
-		background-position: -2*@lw -1*@lh;
-	}
-}
-
-/******** MISC ***************************************************************/
-
-#teaser, #projects {
-	box-shadow: 0 5px 4px -3px darken(@back, 60%);
-}
-
-#contact {
-//	outline: 1px solid red;
-	
-	@ls: 0.8em;
-	@lo: 1.8;
-
-	
-	> div.name, > div.mail {
-		width: 49%;
-		margin-right: 1%;
+	span {
 		float: left;
-		clear: none;
+		padding: 0 .5rem;
+		font-weight: 100;
+		background-color: fade(@back, 60%);
+		margin-bottom: .5rem;
+		
 	}
-	
-	> div {
-		position: relative;
-		width: 99%;
+	small {
 		clear: left;
-		
-	
-		input, textarea, label {
-			padding: .2em .2em .4em .2em;
-		}
-	
-		input, textarea {
-			position: relative;
-			margin-top: @ls * @lo;
-			width: 100%;
-			background-color: transparent;
-			box-shadow:none;
-			border: 0px solid fade(@text, 50%);
-			background-color: fade(white, 60%);
-		}
-	
-		label {
-			position: absolute;
-			left:0;
-			top:0;
-			margin-top: @ls * @lo;
-			cursor: text;
-		//	background-color: fade(red, 20%);
-		
-			transition: margin-top .2s ease, 
-						color .2s ease,
-						font-size .2s ease;
-		}
-	
-		input.ok + label,
-		textarea.ok + label {
-			color: @high_dark;
-			color: darken(@high_alt, 15%);
-		}
-	
-		input:focus + label,
-		input.ok + label,
-		textarea:focus + label,
-		textarea.ok  + label{
-			margin-top:0;
-			font-size: @ls;
-			font-weight: 400;
-			box-shadow:none;
-		}
-		
-		.submit {
-			float: right;
-			width: 10em;
-			
-			background-color: fade(@text, 15%);
-			border: 1px solid fade(@text, 50%);
-			
-			cursor: pointer;
-			transition: border-color .3s ease,
-			            background-color .3s ease;
-		}
-		.submit:hover {
-			border-color: fade(@high, 60%);
-			background-color: fade(@high, 60%);
-		}
-		
-		input:disabled {
-			cursor: not-allowed;
-			background-color: fade(@text, 50%);
-		}
-		input:disabled:hover {
-			border-color: fade(@text, 50%);
-			background-color: fade(@text, 50%);
-		}
+		padding: .5rem;
 	}
-}
-
-.no-touch {
-	#misc {
-		padding-bottom: 70px; // height of navigation
-		position: fixed;
-	}
-	#projects {
-		margin-bottom: 30em;
-	}
-}
-
-section#misc {
-	background-color: transparent;
-	width: 100%;
-	bottom: 0;
-	z-index: -9;
-}
-
-#misc h1.title {
-	border-width:0;
 }
