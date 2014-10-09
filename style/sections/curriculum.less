@@ -1,8 +1,22 @@
-.curriculum .parallax-back {
-	//background-image: url(../img/mbl.jpg);
+// TODO looks awfull
+#curriculum .parallax-back {
+	background-image: url(../img/curriculum/wall_s.jpg);
 }
 
-#curriculum {
+
+@media screen and (min-width: @lap) {
+	#curriculum .parallax-back {
+		background-image: url(../img/curriculum/wall_m.jpg);
+	}
+}
+
+@media screen and (min-width: @desk) {
+	#curriculum .parallax-back {
+		background-image: url(../img/curriculum/wall_l.jpg);
+	}
+}
+
+#curriculum section {
 	border-color: @curriculum;
 
 	.title span {
@@ -13,4 +27,145 @@
 		color: @back;
 		background-color: @curriculum;
 	}	
+}
+
+@cv-border: mix(@high_dark, @back, 40%);
+@cv-border: mix(@text, @back, 40%);
+
+// basic layout for narrow columns
+#cv {
+		
+	.learn, .practice {
+		position: relative;
+		padding-top: 3em;
+		margin-bottom: 3em;
+	}
+	
+	.time {
+		position: absolute;
+		top: 0;
+		display: block;
+		text-align: right;
+		width: 100%;
+	}
+	
+	.learn .time:before,
+	.practice .time:before {
+		float: right;
+		width: 40px;
+		height: 40px;
+		content: " ";
+		background: url(/img/curriculum/diploma2-26.png) no-repeat top right scroll;
+		opacity: 0.5;
+	}
+	
+	.practice .time:before {
+		background-image: url(/img/curriculum/bill-26.png)
+	}
+	
+	.learn .time:after,
+	.practice .time:after {
+		position:absolute;
+		left:0;
+		top:0;
+		padding: .5em;
+		.border-radius;
+
+		content: "Education";
+		background-color: darken(@projects, 10%); //@text;
+		color: @back;
+		opacity: 0;
+		
+		transition: opacity .5s ease;
+	}
+	
+	.practice .time:after {
+		content: "Experience";
+	}
+	
+	.learn:hover .time:after,
+	.practice:hover .time:after {
+		opacity: 0.8;
+	}
+	
+	h3 {
+		position: relative;
+		border-top: 1px solid @cv-border;
+//		background-color: fade(@high_bright, 10%);
+		padding: 0.2em 0 0.2em 0;
+	}
+	
+	h3:before, h3:after {
+		content: " ";
+		position: absolute;
+		width: 0;
+		height: 0;
+		border: 6px solid @cv-border;
+		border-color: transparent transparent @cv-border transparent;
+		top: -12px;
+		right: 10px;
+	}
+	
+	h3:after {
+		border-color: transparent transparent @back transparent;
+		top: -11px;
+		right: 10px;
+	}
+}
+
+@media screen and (min-width: @desk){
+	#cv {
+		@w: 32%;
+		@m: ((100% - 3*@w)/ 3);
+
+		.learn, .practice {
+			width: 2*@w;
+			margin: 0 @m/2 2em @m/2;
+			
+			padding-top: 0;
+			padding-right: @m;
+			
+			
+			border-right: 1px solid @cv-border;
+			
+			h3 {
+				border-top: none;
+			}
+			h3:before, h3:after {
+				display: none;
+			}
+		}
+		
+		.learn:before, .practice:before,
+		.learn:after, .practice:after {
+			content: " ";
+			position: absolute;
+			width: 0;
+			height: 0;
+			border: 6px solid @cv-border;
+			border-color: transparent transparent transparent @cv-border;
+			top: 12px;
+			right: -12px;
+		}
+	
+		.learn:after, .practice:after {
+			border-color: transparent transparent transparent @back;
+			top: 12px;
+			right: -11px;
+		}
+		
+		.location, .time {
+			width: 50% - 4*@m; // @w + 3*@m/2;
+			left: 100%; //2*@w + 5*@m/2;
+			margin-left: 4*@m;
+			text-align: left;
+		}
+		
+		.learn .time:after,
+		.practice .time:after {
+			position: absolute;
+			top: 100%;
+			margin-top: .5em;
+		}
+	}
 }

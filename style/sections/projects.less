@@ -1,21 +1,20 @@
-// TODO looks awfull
-// .projects .parallax-back {
-// 	background-image: url(../img/projects/rock_s.jpg);
-// }
-//
-// @media screen and (min-width: @lap) {
-	.projects .parallax-back {
-		background-image: url(../img/projects/rock_m.jpg);
-	}	
-// }
+#projects .parallax-back {
+	background-image: url(/img/projects/rock_s.jpg);
+}
 
-@media screen and (min-width: @desk) {
-	.projects .parallax-back {
-		background-image: url(../img/projects/rock_l.jpg);
+@media screen and (min-width: @lap) {
+	#projects .parallax-back {
+		background-image: url(/img/projects/rock_m.jpg);
 	}	
 }
 
-#projects {
+@media screen and (min-width: @desk) {
+	#projects .parallax-back {
+		background-image: url(/img/projects/rock_l.jpg);
+	}	
+}
+
+#projects section {
 	border-color: @projects;
 
 	.title span {
@@ -30,4 +29,100 @@
 		color: @back;
 		background-color: @projects;
 	}	
+
+	h1, h2, h3 {
+		color: darken(@projects, 10%);
+	}
+
+	ul#projectsinner {
+		padding: 0;
+		list-style-type: none;
+	}
+	li.project {		
+		position: relative;
+		min-height: 10em;
+		margin-top: 2em;
+	}
+
+	@lw: 40px;
+	@lh: @lw;
+
+	i.logo {
+		position: relative;
+		display: block;
+		width: @lw;
+		height: @lh;
+		margin-bottom: -.4em;
+		background: darken(@projects, 15%) url(/img/projects/logos.png) no-repeat bottom right scroll;
+	}
+	
+	.project:hover i.logo{
+		background-color: darken(@curriculum, 15%)
+	}
+
+	// .project i.logo:before {
+	// 	background-color: transparent;
+	// 	position: absolute;
+	// 	content: " ";
+	// 	width: 100%;
+	// 	height: 100%;
+	// 	top:0;
+	// 	left:0;
+	// 	.border-radius;
+	// 	transition: background-color .3s ease;
+	// }
+
+	// .project:hover i.logo:before {
+	// 	background-color: fade(@high_alt, 25%);
+	// }
+
+	@media screen and (max-width: @lap) {
+		i.logo {
+			display: inline;
+			float: right;
+			margin: .7em .5em 0 0;
+		}
+	}
+
+	i.logo.get{
+		background-position: -1*@lw -0*@lh;
+	}
+	i.logo.bpmai{
+		background-position: -0*@lw -0*@lh;
+	}
+	i.logo.pige{
+		background-position: -0*@lw -2*@lh;
+	}
+	i.logo.interchange{
+		background-position: -2*@lw -0*@lh;
+	}
+	i.logo.monitoring{
+		background-position: -1*@lw -1*@lh;
+	}
+	i.logo.automation{
+		background-position: -1*@lw -2*@lh;
+	}
+	i.logo.modeling{
+		background-position: -0*@lw -1*@lh;
+	}
+	i.logo.oryx{
+		background-position: -2*@lw -1*@lh;
+	}
+}
+
+
+@media screen and (min-width: @lap) and (max-width: unit((unit(@desk)-1),px)) {
+	// 2 column layout -- sync with gird.less
+	// break after 2 columns 
+	#projects li.project:nth-child(2n+3) {
+		clear: left;
+	}
+}
+
+@media screen and (min-width: @desk) {
+	// 3 column layout -- sync with grid.less
+	// break after 3 columns
+	#projects li.project:nth-child(3n+4) {
+		clear: left;
+	}
 }

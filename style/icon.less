@@ -1,0 +1,33 @@
+/******** ICONS **************************************************************/
+
+@icon_dim: 20px;
+.icon {
+	@dim: @icon_dim;
+	@pad: 7px;
+	
+	position: relative;
+	display: inline-block;
+	width: @dim;
+	height: @dim;
+	padding: @pad;
+	margin: @pad/2 @pad/2 @pad/2 0;
+	vertical-align: middle;
+//	white-space: pre-wrap;
+	
+	border: 1px solid fade(@back, 50%);
+	border-radius: @dim+2*@pad;
+	background: fade(@back, 15%) none no-repeat center center scroll;
+	
+	transition: border .5s ease,
+				background-color .5s ease;
+}
+
+a:hover .icon {
+	background-color: fade(@high, 60%);
+	border-color: fade(@high, 60%);
+}
+
+.icon.inv {
+	border-color: fade(@text, 50%);
+	background-color: fade(@text, 15%);
+}

@@ -99,13 +99,16 @@
 					}
 				})(),
 				
-				offset : function(element) {
-				    var top = 0, left = 0;
+				/**
+				 * compute absolute position in browser viewport
+				 */			
+				offset : function(el) {
+				    var top = 0, left = 0, el = _.gid(el);
 				    do {
-				        top += element.offsetTop  || 0;
-				        left += element.offsetLeft || 0;
-				        element = element.offsetParent;
-				    } while(element);
+				        top += el.offsetTop  || 0;
+				        left += el.offsetLeft || 0;
+				        el = el.offsetParent;
+				    } while(el);
 
 				    return {
 				        top: top,
@@ -172,6 +175,82 @@
 			}
 		})(window);
 		
+		/**********************************************************************
+		 * run if visible
+		 * calls fn, if el is visible in the browser's viewport
+		 * repeat number of times the function shall be called, pass Infinity if required
+		 * ensure correct scope in fn
+		 */
+		var runIfVisible = (function(){
+			var riv = function(el, fn, repeat) {
+				riv.r.push({
+					el: el,
+					fn: fn,
+					rp: repeat || !!repeat,
+					top: _.offset(el).top
+				});
+			};
+			
+			var vph = _.dvp().h;
+			
+			// store registrations
+			riv.r = [];
+			
+			// recompute values
+			riv.update = function(){
+				riv.r.forEach(function(r) {
+					r.top = _.offset(r.el).top
+				});
+				
+				vph = _.dvp().h;
+			}
+			
+			// register events for recomputation
+			_.ael("load", riv.update);
+			_.ael("resize", riv.update);
+			_.ael("orientationchange", riv.update);
+			
+			function show() {
+				var stop = _.scp().top;
+				
+				// start showing if elements are visible 
+				
+				var ub = stop + .1 * vph, // 10% from the top edge of viewport
+				    lb = stop + .75 * vph, // 25% from bottom edge of viewport
+					rm = [];
+				
+				// iterate over elements
+				for (var i=0; i < riv.r.length; i++) {
+					var r = riv.r[i];
+					if (!r.d && r.top > ub && r.top < lb) {
+						r.fn(r.el);
+						
+						// disable registration as it has been shown
+						r.d = true;
+						
+						if (!r.rp || (--r.rp < 1)) { 
+							// remove registrations
+							riv.r.splice(i,1);
+							i--;
+						}
+					}
+					
+					// reenable after it vanished from the viewport
+					if (r.d && (r.top > stop + vph || r.top < stop)) {
+						r.d = false;
+					}
+				}
+				
+				console.log(riv.r)						
+			}
+			
+			// call action on scroll
+			_.ael("scroll", show);
+			_.ael("load", show);
+			
+			return riv;
+		})();
+		
 		</script>
 
     </head>
@@ -194,26 +273,38 @@
 		  </noscript>
 		<![endif]-->
 	
-		<section id="teaser">{% include lorem.html%}</section>
+		<section id="teaser">{% include teaser.html%}</section>
 		<section id="aboutme">{% include lorem.html%}</section>
 		
-		<div class="parallax hireme">
+		<div class="parallax" id="hireme">
 			<div class="parallax-back"></div>
-			<section class="parallax-base" id="hireme">{% include lorem.html%}</section>
+			<section class="parallax-base">{% include lorem.html%}</section>
 		</div>
 		
-		<div class="parallax curriculum">
+		<div class="parallax" id="curriculum">
 			<div class="parallax-back"></div>
-			<section class="parallax-base" id="curriculum">{% include lorem.html%}</section>
+			<section class="parallax-base">{% include curriculum.html%}</section>
 		</div>
 		
-		<div class="parallax projects">
+		<div class="parallax" id="projects">
 			<div class="parallax-back"></div>
-			<section class="parallax-base" id="projects">{% include lorem.html%}</section>
+			<section class="parallax-base">{% include projects.html%}</section>
 		</div>
+		
+		{% include footer.html %}
 		
 		<script>
-		var w = 0.5, min = 50, max = 100, 
+		if (document.querySelectorAll && !Modernizr.touch && runIfVisible) {
+			document.body.className = document.body.className + " riv";
+
+			_.toA(document.querySelectorAll("section.parallax-base .title")).forEach(function(t){
+				runIfVisible(t, function(t){t.className = t.className + " riv"});
+			});
+		}
+		</script>
+		
+		<script>
+		var w = 0.5, min = 33, max = 100, 
 			rs = 4/2.3, rh = 4/1.8;
 		
 		// fit all section titles
@@ -225,7 +316,7 @@
 	
 		<script>
 		/**
-		 * enalbe parallax effect for all fragments of following structure
+		 * enable parallax effect for all fragments of following structure
 		 *  <x class="parallax">
 		 *    <y class="parallax-back"></y>
 		 *    <z class="parallax-base"></z>
@@ -234,8 +325,8 @@
 		
 		_.ael("load", (function() {
 
-			// abort if not supported
-			if (!window.getComputedStyle || !document.querySelectorAll) {
+			// abort if not supported or if it is possible that scroll events don't work properly, e.g., on mobile devices which do not redraw during scrolling
+			if (!window.getComputedStyle || !document.querySelectorAll || Modernizr.touch) {
 				return false;
 			}
 			
@@ -315,7 +406,8 @@
 		})); // end of _.ael("load", ... ) -- parallax effect
 		
 		</script>
-	
+		
+
 
 		{% if page.debug %}
 		<!-- .............................................................................................................. -->

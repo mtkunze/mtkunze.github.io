@@ -4,6 +4,8 @@
 /******** GENERAL LAYOUT *****************************************************/
 
 html, body {
+	margin:0; 
+	padding:0;
 	width: 100%;
 	height: 100%;
 	background-color: darken(desaturate(@back, 80%),20%);
@@ -48,7 +50,7 @@ section * {
 
 // -- parallax basic settings -------------------------------------------------
 
-@parallaxBackGroundSize: 40rem; 
+@parallaxBackGroundSize: 30 * @fontsize; 
 // TODO convert to px, em will break
 // TODO this could also be 40vh 
 
@@ -59,14 +61,10 @@ section * {
 	
 	.parallax-back {
 		position: absolute;
-		top: 0;
+		top: -.15 * @parallaxBackGroundSize;
 		left: 0;
 		width: 100%;
-		height:	105vh; 
-			// must be slightly larger than the viewport 
-			// TODO is this properly supported?
-			// TODO this must be reduced for palm and hand, to allow seeing the whole picture			
-			// TODO this could also be 50vh;
+		height:	1.3 * @parallaxBackGroundSize; 
 		
 		background: @back url() no-repeat;
 		background-position: center center;
@@ -78,21 +76,32 @@ section * {
 	}
 }
 
-@media screen and (max-width: @desk) {
+@media screen and (max-width: @desk) { // max 900 px
 	.parallax {
-		padding-top: 40vh; 
+		padding-top: 350px; 
 	}
 	
 	.parallax .parallax-back {
-		height: 50vh;
+		height: 450px;
+	}
+}
+
+@media screen and (max-width: @hand) { // max 400px
+	.parallax {
+		padding-top: 250px; 
+	}
+	
+	.parallax .parallax-back {
+		height: 320px;
 	}
 }
 
 .parallax {
-	border-top: 1px solid @text;
+	border-top: 1px solid lighten(@text, 50%);
 }
+
 .parallax-base {
-	border-top: 3px solid @text;
+	border-top: 3px solid lighten(@text, 50%);
 }
 
 section.parallax-base .title {
@@ -116,4 +125,23 @@ section.parallax-base .title {
 		clear: left;
 		padding: .5rem;
 	}
+}
+
+/*****************************************************************************
+ run if visible
+ ...
+ - if enabled, adds "riv" to body class and adds "riv" to class of registered 
+   elements when they appear in the viewport
+ - rules out touch devices in code
+*/
+
+// not visible
+.riv section.parallax-base .title {
+	left: -200%;
+	transition: left .4s ease-in-out;
+}
+
+// visible
+.riv section.parallax-base .title.riv {
+	left: 0;
 }

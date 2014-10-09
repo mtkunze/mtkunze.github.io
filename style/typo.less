@@ -24,7 +24,7 @@ body, input, textarea, label, table, td {
 section h1, section h2, section h3 {
 //	font-family: 'Lato', 'helvetica neue', sans-serif;
 	font-weight: 100;
-	
+	line-height: 1.2;
 	small {
 		display: block;
 		font-size: 50%;
@@ -32,11 +32,11 @@ section h1, section h2, section h3 {
 	}
 }
 
-section h1 {font-size: 4em}
-section h2 {font-size: 3em}
+section h1 {font-size: 3em}
+section h2 {font-size: 2em}
 section h3,
 nav h3 {
-	font-size: 2em; 
+	font-size: 1.3em; 
 	text-transform: uppercase; 
 	font-weight: 300
 }
@@ -88,7 +88,7 @@ section {
 // if rotation is supported, highlight links with background
 // additional markup is required if links are on a text line with elements of
 // different height, e.g., images. Then, vertical alignment would break.
-.csstransforms section {
+.csstransforms section .inner {
 	a, a .lnk {
 		background-color: transparent;
 		color: @text;

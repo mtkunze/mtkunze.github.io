@@ -1,0 +1,366 @@
+#teaser {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	
+	background-color: @text;
+	box-shadow: 0 3px 5px -3px @text;
+	
+	background: @text url(/img/matthias.jpg) no-repeat center top scroll; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+#teaser {
+	@col: @back;
+	position: relative;
+
+	.title {
+		position: absolute;
+		margin-left: 12%;
+		bottom: 40%;
+		left:0;
+
+		color: @col;
+		text-transform: uppercase;
+		text-align: left;
+		font-size: 2.3em;
+		line-height: 1.3;
+
+		strong {
+			font-weight: 300;
+		}
+
+		small {
+			font-size: 56%;
+			letter-spacing: 0.07em;
+			padding: .3em;
+			text-align: center;
+
+			background-color: fade(@back, 60%);
+			color: @text;
+		}
+
+		span:before {
+			content: "Dr.";
+			position: absolute;
+			right: 100%;
+			margin-right: .2em;
+			color: transparent;
+			transition: color .3s ease;
+			text-shadow: none;
+		}
+
+		span:hover:before {
+			color: darken(@col, 30%);
+			transition: color .3s ease;
+		}
+	}
+}
+
+// -- SCROLLDOWN HINT ---------------------------------------------------------
+
+#scrolldown {
+	position: absolute;
+	width: 100%;
+	bottom: 20px;
+	text-align: center;
+	
+	.icon {
+		position: relative;
+		cursor: default;
+	}
+}
+
+#scrolldown:hover:after {
+	position: absolute;
+	left: 50%;
+	margin-left: 2em;
+	line-height: 2em;
+	vertical-align: middle;
+	content: "Scroll down for more.";
+	color: @back;
+}
+
+// -- NAVIGATION --------------------------------------------------------------
+
+@icon_dim: 20px;
+
+#teasernav {
+	position: absolute;
+	top: 65%;
+	margin-left: 12%;
+	
+	br { // TODO does this work in IE?
+		content: " ";
+		display: none;
+	}
+	
+	a {
+		position: static;
+		text-decoration: none;
+	}
+
+	a div {
+		position: absolute;
+		top: 480%;
+		left: 0;
+		padding: 0.5em 5px; 
+//		width: 30em;
+
+		min-width: 268px;
+		text-align: left;
+
+		opacity: 0;
+		transition: top .3s ease,
+					opacity .4s ease;
+		
+		z-index: 3;
+			
+		background-color: fade(@back, 70%);
+		
+		h3, small {
+			font-size: 1.2em;
+			line-height: 1.3;
+			margin: 0;
+			padding: 0;
+			
+			color: @text;
+		}
+		
+		small {
+			font-size: 1.1em;
+		}
+	}
+	
+	a:hover, a:focus {
+		box-shadow: 0 0 2px -1px @back;
+	}
+	
+	a:hover div, 
+	a:focus div, 
+	a.active div {
+		top: 60px;
+		opacity: 1;
+		transition: top .4s ease,
+					opacity .3s ease;
+	}
+}
+
+#teasernav:after {
+	// IMPORTANT -- required to fix proper hiding, if mouse leaves navigation 
+	// below abstracts (catches hover state)
+	content: " ";
+	position: absolute;
+	left: 0;
+	width: 300%;
+	height: 500%; // should be safe
+	top: 60px;	
+	
+	z-index: 5;
+	
+	background-color: fade(red, 20%);
+}
+
+#footernav,
+#teasernav {
+	.nav-about {
+		background-image: %(~"url(/img/about-%a.png)", unit(@icon_dim));
+		div h3 {color: darken(@text, 20%)}
+	}
+	.nav-top {
+		background-image: url(/img/up.png);
+		background-color: fade(@back, 50%);
+	}
+	.nav-top:hover,
+	.nav-about:hover {
+		color: @back;
+		background-color: fade(@back, 50%);
+	}
+
+	.nav-hireme {
+		background-image: %(~"url(/img/hire-%a.png)", unit(@icon_dim));
+		div h3 {color: darken(@hireme, 20%)}
+	}
+	.nav-hireme:hover {
+		color: @hireme;
+		border-color: @hireme;
+		background-color: fade(lighten(desaturate(@hireme, 20%), 10%), 60%);
+	}
+
+	.nav-curriculum {
+		background-image: %(~"url(/img/cv-%a.png)", unit(@icon_dim));
+		div h3 {color: darken(@curriculum, 20%)}
+	}
+	.nav-curriculum:hover {
+		color: @curriculum;
+		border-color: @curriculum;
+		background-color: fade(lighten(desaturate(@curriculum, 30%), 20%), 60%);
+	}
+
+	.nav-projects {
+		background-image:%(~"url(/img/projects-%a.png)", unit(@icon_dim));
+		div h3 {color: darken(@projects, 20%)}
+	}		
+	.nav-projects:hover {
+		color: @projects;
+		border-color: @projects;
+		background-color: fade(lighten(desaturate(@projects, 30%), 20%), 60%);
+	}
+	
+}
+
+// -- NAVIGATION IN FOOTER ----------------------------------------------------
+
+#footernav {
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	left:0;
+	background-color: fade(@text, 90%);
+	border-top: 1px solid @text;
+	padding: 0;
+	transition: top 0.3s ease, bottom 0.3s ease;
+	
+	nav {
+		padding: 5px 0;
+	}
+	
+	span {
+		display: block;
+		width: 25%;
+		float: left;
+	}
+	
+	a { 
+		position: relative;
+		color: @back;
+		transition: 
+			background-color .3s ease,
+			color .3s ease,
+			border .3s ease;
+	}
+	
+	a:after {
+		position: absolute;
+		display: block;
+		width: auto;
+		top: 5px;
+		left: 2.5 * @icon_dim;
+		white-space: pre;
+		font-weight: 400;
+	}
+	
+	a.nav-about:after { content: "About me." }
+	a.nav-hireme:after { content: "Hire me." }
+	a.nav-curriculum:after { content: "Curriculum." }
+	a.nav-projects:after { content: "Projects." }
+	
+	a.nav-top {
+		position: absolute;
+		margin-top: 9px;
+		top: 0px;
+		right: 20px;
+	}
+}
+
+.no-touch #footernav {
+	bottom: -100px;
+	transition: bottom .3s linear;
+	
+	a.nav-top {
+		transition: top .3s linear, background-color .3s ease;
+		top: -100px;
+		 -webkit-transition-delay: .75s;
+		 	        	transition-delay: .75s;
+	}
+	 -webkit-transition-delay: .75s;
+	         	transition-delay: .75s;
+}
+
+// must only animate if mouseover is available
+.no-touch #footernav:hover,
+.touch {
+	-webkit-transition-delay: 0s; 
+        	transition-delay: 0s;
+	bottom: 0;
+	a.nav-top {
+		border-color: @back;
+		background-color: fade(@back, 20%);
+		-webkit-transition-delay: 0s; 
+	        	transition-delay: 0s;
+		top: 0;
+	}
+	a.nav-top:hover {
+		background-color: fade(@back, 50%);
+	}
+}
+// */
+// -- z-index stacking --------------------------------------------------------
+
+section {
+	z-index: 10;
+}
+
+#teaser {
+	z-index: 20;
+}
+
+#footernav {
+	z-index: 15;
+}
+
+// -- media queries -----------------------------------------------------------
+
+@media screen and (max-width: 500px) {
+
+	#teaser {
+		background-image: url(/img/matthias_small.jpg);
+
+		.title {
+			width: 100%;
+			margin-left: 0;
+			margin-right: 0;
+			text-align: center;
+			top: inherit;
+			bottom: 0;
+
+			font-size: 33.3px; // sync with javascript
+
+			span:before {
+				content: "";
+			}
+		}
+	}
+	
+	#scrolldown {
+		display: none;
+	}
+	
+	#teasernav {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.touch #footernav,
+	.no-touch #footernav {
+		bottom: 0;
+		
+		span {
+			text-align: center;
+		}
+		a:after {
+			content: " " !important;
+		}
+		a.nav-top {
+			display: none;
+		}
+	}
+	
+}
+
