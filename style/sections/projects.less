@@ -16,6 +16,16 @@
 
 #projects section {
 	border-color: @projects;
+	
+	::-moz-selection {
+	    background: lighten(desaturate(@projects, 30%), 10%);
+		color: #fff;
+	}
+
+	::selection {
+	    background: lighten(desaturate(@projects, 30%), 10%);
+		color: #fff;
+	}
 
 	.title span {
 		color: @projects;

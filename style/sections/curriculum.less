@@ -18,6 +18,16 @@
 
 #curriculum section {
 	border-color: @curriculum;
+	
+	::-moz-selection {
+	    background: lighten(@curriculum, 20%);
+		color: #fff;
+	}
+
+	::selection {
+	    background: lighten(@curriculum, 20%);
+		color: #fff;
+	}
 
 	.title span {
 		color: @curriculum;

@@ -187,7 +187,8 @@
 					el: el,
 					fn: fn,
 					rp: repeat || !!repeat,
-					top: _.offset(el).top
+					top: _.offset(el).top,
+					bot: _.offset(el).top + el.offsetHeight
 				});
 			};
 			
@@ -199,7 +200,8 @@
 			// recompute values
 			riv.update = function(){
 				riv.r.forEach(function(r) {
-					r.top = _.offset(r.el).top
+					r.top = _.offset(r.el).top;
+					r.bot = r.top + r.el.offsetHeight;
 				});
 				
 				vph = _.dvp().h;
@@ -212,7 +214,6 @@
 			
 			function show() {
 				var stop = _.scp().top;
-				
 				// start showing if elements are visible 
 				
 				var ub = stop + .1 * vph, // 10% from the top edge of viewport
@@ -222,7 +223,7 @@
 				// iterate over elements
 				for (var i=0; i < riv.r.length; i++) {
 					var r = riv.r[i];
-					if (!r.d && r.top > ub && r.top < lb) {
+					if (!r.d && r.bot > ub && r.top < lb) {
 						r.fn(r.el);
 						
 						// disable registration as it has been shown
@@ -240,8 +241,6 @@
 						r.d = false;
 					}
 				}
-				
-				console.log(riv.r)						
 			}
 			
 			// call action on scroll
@@ -273,20 +272,20 @@
 		  </noscript>
 		<![endif]-->
 	
-		<section id="teaser">{% include teaser.html%}</section>
-		<section id="aboutme">{% include lorem.html%}</section>
+		<section id="teaser" data-pagetitle="Matthias Kunze | BPM Expert · IT Enginer">{% include teaser.html%}</section>
+		<section id="aboutme" data-pagetitle="About me">{% include lorem.html%}</section>
 		
-		<div class="parallax" id="hireme">
+		<div class="parallax" id="hireme" data-pagetitle="Hire me">
 			<div class="parallax-back"></div>
-			<section class="parallax-base">{% include lorem.html%}</section>
+			<section class="parallax-base">{% include hireme.html%}</section>
 		</div>
 		
-		<div class="parallax" id="curriculum">
+		<div class="parallax" id="curriculum" data-pagetitle="Curriculum">
 			<div class="parallax-back"></div>
 			<section class="parallax-base">{% include curriculum.html%}</section>
 		</div>
 		
-		<div class="parallax" id="projects">
+		<div class="parallax" id="projects" data-pagetitle="Projects">
 			<div class="parallax-back"></div>
 			<section class="parallax-base">{% include projects.html%}</section>
 		</div>
@@ -300,6 +299,17 @@
 			_.toA(document.querySelectorAll("section.parallax-base .title")).forEach(function(t){
 				runIfVisible(t, function(t){t.className = t.className + " riv"});
 			});
+			
+			_.toA(document.querySelectorAll("section")).concat(
+			_.toA(document.querySelectorAll("div"))).forEach(
+				function(s){
+					if (s.dataset["pagetitle"]) {			
+						runIfVisible(s, function(s){
+							window.document.title = s.dataset["pagetitle"];
+						}, Infinity);
+					}
+				}
+			);
 		}
 		</script>
 		

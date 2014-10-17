@@ -300,6 +300,59 @@
 	}
 }
 // */
+
+// -- hireme bookmark ---------------------------------------------------------
+
+@hirememarkback: darken(desaturate(@hireme, 10%), 10%);
+
+#hirememark {
+	position: absolute;
+	top: 0;
+	left: 12%;
+	width: 5em;
+//	height: 7em;
+	padding: 1em;
+	
+	background-color: @hirememarkback;
+	color: @back;
+
+	box-shadow: 0 5px 2em -.3em fade(#000, 60%);
+	// border: 1px solid fade(@back, 50%);
+	// border-width: 0 1px;
+	
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: 400;
+	text-align: center;
+	
+	small {
+		display: block;
+		margin-top: 1em;
+		font-size: .9em;
+		text-transform: none;
+		text-align: left;
+	}
+}
+
+// #hirememark:before,
+#hirememark:after {
+	content: " ";
+	position: absolute;
+	top: 100%;
+	left: 0;
+
+    border: solid;
+    border-color: transparent @hirememarkback;
+    border-width: 0 3.5em 1.7em;
+}
+//
+// #hirememark:before {
+// 	height: 1.2px;
+// 	left: -1px;
+// 	padding: 0 1px;
+// 	border-color: transparent fade(@back, 50%);
+// }
+
 // -- z-index stacking --------------------------------------------------------
 
 section {
@@ -312,6 +365,10 @@ section {
 
 #footernav {
 	z-index: 15;
+}
+
+#hirememark {
+	z-index: 21;
 }
 
 // -- media queries -----------------------------------------------------------
@@ -342,6 +399,10 @@ section {
 	}
 	
 	#teasernav {
+		display: none;
+	}
+	
+	#hirememark small {
 		display: none;
 	}
 }
