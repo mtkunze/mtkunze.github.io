@@ -1,6 +1,7 @@
 @fontsize: 16px;
 @leftspace: 10%;
 
+
 /******** GENERAL LAYOUT *****************************************************/
 
 html, body {
@@ -8,7 +9,7 @@ html, body {
 	padding:0;
 	width: 100%;
 	height: 100%;
-	background-color: darken(desaturate(@back, 80%),20%);
+	background-color: @bodyback;
 }
 
 /******** SECTIONS ***********************************************************/
@@ -22,20 +23,20 @@ section {
 	background-color: @back;
 	
 	// gradient to separate section
-	background-image: linear-gradient(
-		darken(@back, 0%), 
-		darken(@back, 3%) 30em); // 80vh would be better, but is not yet well supported
+	// background-image: linear-gradient(
+	// 	darken(@back, 0%),
+	// 	darken(@back, 7%) 30em); // 80vh would be better, but is not yet well supported
 		
-	box-shadow: inset 0 -100px 105px -170px fade(@text,50%);
+//	box-shadow: inset 0 -100px 105px -170px fade(@text,50%);
 }
 
-section {
-	background-image: none;
-	// box-shadow:
-	// 	inset 0 -60em 20em -20em darken(@back, 3%),
-	// 	inset 0 5px 15px -10px darken(@back, 20%);
-	// border-bottom: 1px solid darken(@back, 10%);
-}
+// section {
+// //	background-image: none;
+// 	// box-shadow:
+// 	//  	inset 0 -60em 20em -20em darken(@back, 7%); //,
+// 	// 	inset 0 5px 15px -10px darken(@back, 40%);
+// 	// border-bottom: 1px solid darken(@back, 10%);
+// }
 
 section * {
 	z-index: 5;
@@ -69,31 +70,10 @@ section * {
 		background: @back url() no-repeat;
 		background-position: center center;
 		background-size: cover;
-		
 	}
 
 	.parallax-base, .parallax-base .inner {
 		position: relative; 
-	}
-}
-
-@media screen and (max-width: @desk) { // max 900 px
-	.parallax {
-		padding-top: 350px; 
-	}
-	
-	.parallax .parallax-back {
-		height: 450px;
-	}
-}
-
-@media screen and (max-width: @hand) { // max 400px
-	.parallax {
-		padding-top: 250px; 
-	}
-	
-	.parallax .parallax-back {
-		height: 320px;
 	}
 }
 
@@ -125,6 +105,46 @@ section.parallax-base .title {
 	small {
 		clear: left;
 		padding: .5rem;
+	}
+}
+
+@media screen and (max-width: @desk) { // applies to lap-sized device
+	.parallax {
+		padding-top: 350px; 
+	}
+	
+	.parallax .parallax-back {
+		height: 450px;
+	}
+}
+
+@media screen and (max-width: @lap) { // applies to hand-sizd device
+	.parallax, .parallax-base {
+		padding-top: 0; 
+		border-width: 0;
+	}
+	
+	.parallax .parallax-back {
+		height: 0;
+	}
+	
+	section {
+		box-shadow:	inset 0 -25em 10em -10em darken(@back, 7%);
+	}
+	
+	section.parallax-base .title {
+		position: relative;
+		top: 0;
+		padding: .5rem 0;
+		margin: 0 0 1em;
+		text-align: center;
+		
+		span {
+			text-align: center;
+			float: none;
+			line-height: 1.5;
+			font-weight: 300;
+		}
 	}
 }
 

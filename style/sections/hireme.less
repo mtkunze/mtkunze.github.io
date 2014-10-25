@@ -1,6 +1,6 @@
-#hireme .parallax-back {
-	background-image: url(../img/hireme/mb_s.jpg);
-}
+// #hireme .parallax-back {
+// 	background-image: url(../img/hireme/mb_s.jpg);
+// }
 
 @media screen and (min-width: @lap) {
 	#hireme .parallax-back {
@@ -35,6 +35,32 @@
 		color: @back;
 		background-color: @hireme;
 	}	
+	
+	h1, h2, h3,
+	.list li:before {
+		color: darken(@hireme, 0%);
+	}
+	
+	// .inner {
+	
+	a {
+		color: darken(@hireme, 20%);
+	}
+	
+	a:hover {
+		color: @back;
+		border-color: @hireme;
+	}
+	a:hover:after {
+		background-color: @hireme;
+	}
+	
+	a:hover .icon {
+		background-color: fade(@hireme, 40%);
+		border-color: fade(@hireme, 100%);
+	}
+	
+	// }
 	
 	@headshotborder: 10px;
 	@headshotrot: -7deg;

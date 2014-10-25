@@ -3,8 +3,8 @@
 @desk: 900px;
 @maxwidth: 60em;
 
-/*
-// Debug 
+
+/*/ Debug 
 section {
 	background-color: fade(green, 10%);
 }
@@ -24,6 +24,10 @@ section h1.title {
 
 .col3 {
 	outline: 1px solid blue;
+}
+
+.flexcol {
+	background-color: fade(blue, 30%);
 }
 
 section > .inner {
@@ -49,11 +53,6 @@ section {
 }
 
 section > .inner {
-	// what whas that good for?
-	// * {
-	// 	clear: left;
-	// }
-	
 	.col, .col2, .col3 {
 		clear: none;
 		float: left;
@@ -62,7 +61,7 @@ section > .inner {
 
 section > .inner:after,
 section > .inner .clr,
-hr.clr { // strangley, safari needs this 
+hr.clr { // strangely, safari needs this 
 	clear: both;
 	display: block;
 	border-color: transparent;
@@ -70,9 +69,7 @@ hr.clr { // strangley, safari needs this
 }
 
 // --------------------------------------------------------- HAND sized devices
-section > .inner
-//, section h1.title 
-{
+section > .inner {
 	margin-left: auto;
 	margin-right: auto;
 	width: 80%;
@@ -81,17 +78,13 @@ section > .inner
 // the following provides for a seemless transition from 80% to 95% width on
 // narrow devices
 @media screen and (max-width: (@hand/.8)) {
-	section > .inner
-//	, section h1.title 
-	{
+	section > .inner {
 		width: @hand;
 	}
 }
 
 @media screen and (max-width: (@hand/.95)) {
-	section > .inner
-//	, section h1.title 
-	{
+	section > .inner {
 		width: 95%;
 	}
 }
@@ -100,13 +93,27 @@ section > .inner {
 	@w: 95%;
 	@m: (100% - @w);
 	
-	.col, .col2, .col3 {
-		width: @w;
+	.flexcol, .col, .col2, .col3 {
 		padding: 0;
 		margin-left: (@m/2);
 		margin-right: (@m/2);
 	}
+	
+	.col, .col2, .col3 {
+		width: @w;
+	}
 }
+
+// disable float when everything is stacked above each other anyways
+// otherwise boudning boxes behave funny
+@media screen and (max-width: (@lap)) {
+	section > .inner {
+		.flexcol, .col, .col2, .col3 {
+			float: none;
+		}
+	}
+}
+
 
 // ---------------------------------------------------------- LAP sized devices
 @media screen and (min-width: @lap){
@@ -116,7 +123,7 @@ section > .inner {
 		@w: 45%;
 		@m: ((100% - 2 * @w) / 2);
 
-		.col, .col2, .col3 {
+		.flexcol, .col, .col2, .col3 {
 			margin-left: (@m/2);
 			margin-right: (@m/2);
 		}
@@ -128,6 +135,10 @@ section > .inner {
 		.col2, .col3 {
 			width: 2*@w + @m;
 		}
+		
+		.spc1.flexcol {
+			margin-left: @w + 3*@m/2;
+		}
 	}	
 	
 	#debug:after {
@@ -137,9 +148,7 @@ section > .inner {
 
 // ------------------------------------------------------ DESKTOP sized devices
 @media screen and (min-width: @desk){
-	section > .inner
-//	, section h1.title 
-	{
+	section > .inner {
 		max-width: unit(@maxwidth * unit(@fontsize), px); // 60em, independent of fontsize of h1
 	}
 	
@@ -165,7 +174,7 @@ section > .inner {
 			width: 3*@w + 2*@m;
 		}
 		
-		.spc1 {
+		.spc1, .spc1.flexcol {
 			margin-left: @w + 3*@m/2;
 		}
 		

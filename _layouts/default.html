@@ -273,7 +273,20 @@
 		<![endif]-->
 	
 		<section id="teaser" data-pagetitle="Matthias Kunze | BPM Expert · IT Enginer">{% include teaser.html%}</section>
-		<section id="aboutme" data-pagetitle="About me">{% include lorem.html%}</section>
+		<section id="aboutme" data-pagetitle="About me">{% include aboutme.html%}</section>
+		
+		<script>
+			// this avoids constant resizing on touch devices that hide/show
+			// the address bar when scrolling
+			(function(){
+				if(Modernizr.touch) {
+					_.ael("load", function(){
+						var t = _.gid("teaser");
+						t.style.height = Math.min(_.dvp().h, parseInt(window.getComputedStyle(t).height)) + "px";
+					});
+				}
+			})()
+		</script>
 		
 		<div class="parallax" id="hireme" data-pagetitle="Hire me">
 			<div class="parallax-back"></div>
@@ -289,6 +302,8 @@
 			<div class="parallax-back"></div>
 			<section class="parallax-base">{% include projects.html%}</section>
 		</div>
+		
+		{% include contact.html %}
 		
 		{% include footer.html %}
 		
@@ -314,12 +329,16 @@
 		</script>
 		
 		<script>
-		var w = 0.5, min = 33, max = 100, 
+		var w = 0.5, min = 50, max = 120, 
 			rs = 4/2.3, rh = 4/1.8;
 		
 		// fit all section titles
 		_.toA(document.querySelectorAll("section h1.title")).forEach(function(t) {
-			_.fit(t, {w: w, min: min, max:max});  
+			if (t.id != "matthias") {
+				_.fit(t, {w: w, min: min, max:max});  
+			} else {
+				_.fit(t, {w: w, min: 33, max:max});  
+			}
 		});
 		
 		</script>

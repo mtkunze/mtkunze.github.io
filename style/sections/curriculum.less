@@ -1,7 +1,7 @@
 // TODO looks awfull
-#curriculum .parallax-back {
-	background-image: url(../img/curriculum/wall_s.jpg);
-}
+// #curriculum .parallax-back {
+// 	background-image: url(../img/curriculum/wall_s.jpg);
+// }
 
 
 @media screen and (min-width: @lap) {
@@ -37,6 +37,26 @@
 		color: @back;
 		background-color: @curriculum;
 	}	
+	
+	h1, h2, h3 {
+		color: darken(@curriculum, 10%);
+	}
+	
+	// .inner {
+		
+	a {
+		color: darken(@curriculum, 5%);
+	}
+
+	a:hover {
+		color: @back;
+		border-color: @curriculum;
+	}
+	a:hover:after {
+		background-color: @curriculum;
+	}
+		
+	// }
 }
 
 @cv-border: mix(@high_dark, @back, 40%);

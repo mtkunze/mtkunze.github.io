@@ -1,0 +1,122 @@
+<section id="misc">
+	<span class="title" style="display:none">Miscellaneous</span>
+	<div class="inner">
+		<div class="col">
+			<h3>Contact</h3>
+			<p>
+				Feel free to send me a message. Please, leave your name and e-mail address, so I can get back to you. <br/>
+				Please note that your message will be processed and stored in Google Drive.
+				<noscript><p>
+					The contact form does not work, because you have javascript disabled. Please follow this <a class="ln" href="https://docs.google.com/a/matthias-kunze.info/forms/d/1J896jf7e1boMDXCfgxWSVSHmuONNN-nutrFrvEG_yQw/viewform">link</a>.
+				</p></noscript>
+			</p>
+		</div>
+		<form id="contactform" class="col2" action="" method="POST">
+			<!-- from google forms -->
+			<input type="hidden" name="draftResponse" value="[,,&quot;-6722092732372038941&quot;]">
+			<input type="hidden" name="pageHistory" value="0">
+			<input type="hidden" name="fromEmail" value="false">
+			<!-- from google forms -->
+			
+			<input type="hidden" name="fbzx" value="-6722092732372038941">
+			
+			<div class="name">
+				<input id="name" name="entry.418961107" type="text" value="" required disabled="disabled" />
+				<label for="name">Your name</label>
+			</div>
+			<div class="mail">
+				<input id="mail" name="entry.1686305661" type="text" value="" required disabled/>
+				<label for="mail">Your e-mail address</label>
+			</div>
+			<div>
+				<textarea id="msg" name="entry.1247928453" required disabled></textarea>
+				<label for="msg">Your message</label>
+			</div>
+			<div>
+				<input id="submit" type="submit" class="submit" value="send" disabled/>
+			</div>
+			<script>
+			
+			var elements = Array.prototype.filter
+				.call(_.gid("contactform").elements, function(e) {
+					return e.type == "text" || e.type == "textarea";
+				});
+				
+			elements.forEach(function(e){
+				e.value = "";
+				e.disabled = false;
+			
+				function update() {
+					
+					// state of current field
+					if (e.value.length > 0) {
+						if (!e.className.match(/ok/)) {
+							e.className = e.className + " ok";
+						}
+					} else {
+						if (e.className.match(/ok/)) {
+							e.className = e.className.replace (/ok/g,"");
+						}
+					}
+					
+					// state of all
+					if (elements.every(function(e){
+						return e.className.match(/ok/);
+					})) {				
+						_.gid("submit").disabled = false;
+						_.gid("contactform").action = _.decode("117|129|129|125|128|71|60|60|113|124|112|128|59|116|124|124|116|121|114|59|112|124|122|60|110|60|122|110|129|129|117|118|110|128|58|120|130|123|135|114|59|118|123|115|124|60|115|124|127|122|128|60|113|60|62|87|69|70|67|119|115|68|114|62|111|124|90|81|101|80|115|116|133|100|96|99|96|85|122|130|92|91|91|91|58|123|130|129|127|83|127|131|82|84|108|134|94|132|60|115|124|127|122|95|114|128|125|124|123|128|114");
+console.log("ok")				
+					}
+					else {
+console.log("!ok")								
+						_.gid("submit").disabled = true;
+						_.gid("contactform").action = "";
+					}
+				}
+				
+				e.onkeyup = update;
+				e.onblur = update;
+			});
+			</script>
+			
+		</form>
+		
+		<div class="col3">
+			<h3>About this page</h3>
+			This page uses some icons from <a class="ln" href="http://icons8.com/" target="_blank"><span class="lnk">Icons8</span></a> and 
+			is hosted by <a class="ln" href="http://github.io/" target="_blank"><span class="lnk">GitHub</span></a>. 
+			I took all landscape <a href="http://flickr.com/mtkunze" class="ln">photos</a> myself.
+			The code is published under an open source license and available <a class="ln" href="https://github.com/mtkunze/mtkunze.github.io"><span class="lnk">here</span></a>.
+			It makes use of JavaScript and CSS; if you experience any problem, please file a <a class="ln" href="https://github.com/mtkunze/mtkunze.github.io/issues"><span class="lnk">report</span></a>. 
+		</div>
+	</div>
+</section>
+
+<hr class="clr" id="contact"/>
+<script>
+(function(){
+	function margin(){
+		var s = window.getComputedStyle(_.gid("misc"));
+		var h = 0;
+		["height", "paddingBottom", "paddingTop", "marginBottom", "marginTop"].forEach(function(p){
+			h += parseInt(s[p]);
+		});
+		
+		if (h > _.dvp().h) {
+			_.gid("misc").style.position = "relative";
+			_.gid("projects").style.marginBottom = "inherit";
+		}
+		else {
+			_.gid("misc").style.position = "fixed";
+			_.gid("projects").style.marginBottom = h + "px";
+		}
+	}
+	
+	// only change position fixed/Relative on no-touch devices
+	// will be relative on touch devices by CSS
+	if (!Modernizr.touch) {
+		_.ael("resize", margin);
+		_.ael("load", margin);
+	}	
+})();
+</script>

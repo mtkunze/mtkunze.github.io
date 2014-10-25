@@ -1,6 +1,6 @@
-#projects .parallax-back {
-	background-image: url(/img/projects/rock_s.jpg);
-}
+// #projects .parallax-back {
+// 	background-image: url(/img/projects/rock_s.jpg);
+// }
 
 @media screen and (min-width: @lap) {
 	#projects .parallax-back {
@@ -43,6 +43,26 @@
 	h1, h2, h3 {
 		color: darken(@projects, 10%);
 	}
+
+	// .inner {
+
+	a {
+		color: darken(@projects, 0%);
+	}
+	
+	.location a {
+		color: @text;
+	}
+	
+	a:hover {
+		color: @back;
+		border-color: @projects;
+	}
+	a:hover:after {
+		background-color: @projects;
+	}
+	
+	// }
 
 	ul#projectsinner {
 		padding: 0;

@@ -78,6 +78,7 @@
 
 #scrolldown:hover:after {
 	position: absolute;
+	top: 5px;
 	left: 50%;
 	margin-left: 2em;
 	line-height: 2em;
@@ -138,7 +139,7 @@
 	}
 	
 	a:hover, a:focus {
-		box-shadow: 0 0 2px -1px @back;
+//		box-shadow: 0 0 2px -1px @back;
 	}
 	
 	a:hover div, 
@@ -157,13 +158,13 @@
 	content: " ";
 	position: absolute;
 	left: 0;
-	width: 300%;
+	width: 200%;
 	height: 500%; // should be safe
 	top: 60px;	
 	
 	z-index: 5;
 	
-	background-color: fade(red, 20%);
+//	background-color: fade(red, 20%);
 }
 
 #footernav,
@@ -212,16 +213,45 @@
 		background-color: fade(lighten(desaturate(@projects, 30%), 20%), 60%);
 	}
 	
+	.nav-contact {
+		background-image:%(~"url(/img/contact-%a.png)", unit(@icon_dim));
+		div h3 {color: darken(@contact, 20%)}
+	}		
+	.nav-contact:hover {
+		color: @contact;
+		border-color: @contact;
+		background-color: fade(lighten(desaturate(@contact, 30%), 20%), 60%);
+	}
+}
+
+// Special case with @contact color
+#footernav {
+	.nav-contact:hover {
+		color: lighten(@contact, 30%);
+	}
+	.nav-curriculum:hover {
+		color: lighten(@curriculum, 20%);
+	}
 }
 
 // -- NAVIGATION IN FOOTER ----------------------------------------------------
 
 #footernav {
+	
+	@numlinks: 5; // show five links in footer
+	a.nav-about:after { content: "About me" }
+	a.nav-hireme:after { content: "Hire me" }
+	a.nav-curriculum:after { content: "Curriculum" }
+	a.nav-projects:after { content: "Projects" }
+	a.nav-contact:after { content: "Contact" }
+	
+	
 	position: fixed;
 	width: 100%;
 	bottom: 0;
 	left:0;
 	background-color: fade(@text, 90%);
+	box-shadow: none;
 	border-top: 1px solid @text;
 	padding: 0;
 	transition: top 0.3s ease, bottom 0.3s ease;
@@ -231,9 +261,12 @@
 	}
 	
 	span {
+		position: relative;
 		display: block;
-		width: 25%;
+		width: (100% / @numlinks);
 		float: left;
+		
+//		outline: 1px solid red;
 	}
 	
 	a { 
@@ -254,11 +287,6 @@
 		white-space: pre;
 		font-weight: 400;
 	}
-	
-	a.nav-about:after { content: "About me." }
-	a.nav-hireme:after { content: "Hire me." }
-	a.nav-curriculum:after { content: "Curriculum." }
-	a.nav-projects:after { content: "Projects." }
 	
 	a.nav-top {
 		position: absolute;
@@ -317,6 +345,7 @@
 	color: @back;
 
 	box-shadow: 0 5px 2em -.3em fade(#000, 60%);
+	transition: box-shadow .3s ease;
 	// border: 1px solid fade(@back, 50%);
 	// border-width: 0 1px;
 	
@@ -332,6 +361,10 @@
 		text-transform: none;
 		text-align: left;
 	}
+}
+
+#hirememark:hover {
+	box-shadow: 0 5px 2em -.3em fade(@text, 60%);
 }
 
 // #hirememark:before,
@@ -407,21 +440,46 @@ section {
 	}
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
 	.touch #footernav,
 	.no-touch #footernav {
 		bottom: 0;
 		
-		span {
-			text-align: center;
+		span a {
+			position: static;
+			display: block;
+			margin: 0 auto @icon_dim;	
 		}
+		
 		a:after {
-			content: " " !important;
+			position: absolute;
+			top: 8px;
+			left: 0;
+			width: 100%;
+			text-align: center;
+			font-size: 80%;
+			margin-top: 1.5 * @icon_dim;
+//			content: " " !important;
 		}
 		a.nav-top {
 			display: none;
 		}
 	}
-	
 }
 
+@media screen and (max-width: 450px) {
+	.touch #footernav,
+	.no-touch #footernav {
+		bottom: 0;
+		
+		span a {
+			margin: 0 auto;
+		}
+		a:after {
+			display: none;
+		}
+		a.nav-top {
+			display: none;
+		}
+	}
+}
