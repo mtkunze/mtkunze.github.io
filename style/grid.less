@@ -1,0 +1,193 @@
+@hand: 400px;
+@lap:  550px;
+@desk: 900px;
+@maxwidth: 60em;
+
+
+/*/ Debug 
+section {
+	background-color: fade(green, 10%);
+}
+
+section > .inner,
+section h1.title {
+	background-color: fade(red, 20%);
+}
+
+.col {
+	outline: 1px dotted blue;
+}
+
+.col2 {
+	outline: 1px dashed blue;
+}
+
+.col3 {
+	outline: 1px solid blue;
+}
+
+.flexcol {
+	background-color: fade(blue, 30%);
+}
+
+section > .inner {
+
+	.col, .col2, .col3 {
+		background: fade(red, 20%);
+	}
+}
+
+// */
+
+#debug {
+	position: fixed;
+	top:0;
+	left:0;
+	z-index: 50000;
+	color: red;
+}
+
+// --------------------------------------------------------------- BASIC layout
+section {
+	clear: both;
+}
+
+section > .inner {
+	.col, .col2, .col3 {
+		clear: none;
+		float: left;
+	}
+	
+	.col.right, .col2.right {
+		float: right;
+	}
+}
+
+section > .inner:after,
+section > .inner .clr,
+hr.clr { // strangely, safari needs this 
+	clear: both;
+	display: block;
+	border-color: transparent;
+	content: " ";
+}
+
+// --------------------------------------------------------- HAND sized devices
+section > .inner {
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+}
+
+// the following provides for a seemless transition from 80% to 95% width on
+// narrow devices
+@media screen and (max-width: (@hand/.8)) {
+	section > .inner {
+		width: @hand;
+	}
+}
+
+@media screen and (max-width: (@hand/.95)) {
+	section > .inner {
+		width: 95%;
+	}
+}
+
+section > .inner {
+	@w: 95%;
+	@m: (100% - @w);
+	
+	.flexcol, .col, .col2, .col3 {
+		padding: 0;
+		margin-left: (@m/2);
+		margin-right: (@m/2);
+	}
+	
+	.col, .col2, .col3 {
+		width: @w;
+	}
+}
+
+// disable float when everything is stacked above each other anyways
+// otherwise boudning boxes behave funny
+@media screen and (max-width: (@lap)) {
+	section > .inner {
+		.flexcol, .col, .col2, .col3 {
+			float: none;
+		}
+	}
+}
+
+
+// ---------------------------------------------------------- LAP sized devices
+@media screen and (min-width: @lap){
+
+	section > .inner {
+		// 2-column layout
+		@w: 45%;
+		@m: ((100% - 2 * @w) / 2);
+
+		.flexcol, .col, .col2, .col3 {
+			margin-left: (@m/2);
+			margin-right: (@m/2);
+		}
+		
+		.col {
+			width: @w;
+		}
+		
+		.col2, .col3 {
+			width: 2*@w + @m;
+		}
+		
+		.spc1.flexcol {
+			margin-left: @w + 3*@m/2;
+		}
+	}	
+	
+	#debug:after {
+		content: "lap";
+	}
+}
+
+// ------------------------------------------------------ DESKTOP sized devices
+@media screen and (min-width: @desk){
+	section > .inner {
+		max-width: unit(@maxwidth * unit(@fontsize), px); // 60em, independent of fontsize of h1
+	}
+	
+	section > .inner {
+		// 3 column layout
+		@w: 28%;
+		@m: ((100% - 3*@w)/ 3);
+		
+		.col, .col2, .col3 {
+			margin-left: (@m/2);
+			margin-right: (@m/2);
+		}
+		
+		.col {
+			width: @w;
+		}
+		
+		.col2 {
+			width: 2*@w + @m;
+		}
+		
+		.col3 {
+			width: 3*@w + 2*@m;
+		}
+		
+		.spc1, .spc1.flexcol {
+			margin-left: @w + 3*@m/2;
+		}
+		
+		.spc2 {
+			margin-left: 2*@w + 5*@m/2;
+		}
+	}
+	
+	#debug:after {
+		content: "desk";
+	}
+}

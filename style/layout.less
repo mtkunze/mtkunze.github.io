@@ -1,0 +1,168 @@
+@fontsize: 16px;
+@leftspace: 10%;
+
+
+/******** GENERAL LAYOUT *****************************************************/
+
+html, body {
+	margin:0; 
+	padding:0;
+	width: 100%;
+	height: 100%;
+	background-color: @bodyback;
+}
+
+/******** SECTIONS ***********************************************************/
+
+section {
+	position: relative;
+	display: block;
+	margin: 0;
+	padding: 0;
+	
+	background-color: @back;
+	
+	// gradient to separate section
+	// background-image: linear-gradient(
+	// 	darken(@back, 0%),
+	// 	darken(@back, 7%) 30em); // 80vh would be better, but is not yet well supported
+		
+//	box-shadow: inset 0 -100px 105px -170px fade(@text,50%);
+}
+
+// section {
+// //	background-image: none;
+// 	// box-shadow:
+// 	//  	inset 0 -60em 20em -20em darken(@back, 7%); //,
+// 	// 	inset 0 5px 15px -10px darken(@back, 40%);
+// 	// border-bottom: 1px solid darken(@back, 10%);
+// }
+
+section * {
+	z-index: 5;
+}
+
+.inner {
+//	max-width: @width; -- set in grid.less
+	margin: 0 auto;
+	padding: 2em 0;
+}
+
+
+// -- parallax basic settings -------------------------------------------------
+
+@parallaxBackGroundSize: 30 * @fontsize; 
+// TODO convert to px, em will break
+// TODO this could also be 40vh 
+
+.parallax {
+	position: relative;
+	padding-top: @parallaxBackGroundSize;
+	overflow: hidden;
+	
+	.parallax-back {
+		position: absolute;
+		top: -.15 * @parallaxBackGroundSize;
+		left: 0;
+		width: 100%;
+		height:	1.3 * @parallaxBackGroundSize; 
+		
+		background: @back url() no-repeat;
+		background-position: center center;
+		background-size: cover;
+	}
+
+	.parallax-base, .parallax-base .inner {
+		position: relative; 
+	}
+}
+
+.parallax {
+	border-top: 1px solid lighten(@text, 50%);
+}
+
+.parallax-base {
+	border-top: 3px solid lighten(@text, 50%);
+}
+
+section.parallax-base .title {
+	position: absolute;
+	top: -4em;
+	left: 0;
+	
+	text-align: left;
+	padding: 0em 2.66667%; // TODO align with @m from grid.less
+	line-height: 1.2;
+	
+	span {
+		float: left;
+		padding: 0 .5rem;
+		font-weight: 100;
+		background-color: fade(@back, 60%);
+		margin-bottom: .5rem;
+		
+	}
+	small {
+		clear: left;
+		padding: .5rem;
+	}
+}
+
+@media screen and (max-width: @desk) { // applies to lap-sized device
+	.parallax {
+		padding-top: 350px; 
+	}
+	
+	.parallax .parallax-back {
+		height: 450px;
+	}
+}
+
+@media screen and (max-width: @lap) { // applies to hand-sizd device
+	.parallax, .parallax-base {
+		padding-top: 0; 
+		border-width: 0;
+	}
+	
+	.parallax .parallax-back {
+		height: 0;
+	}
+	
+	section {
+		box-shadow:	inset 0 -25em 10em -10em darken(@back, 7%);
+	}
+	
+	section.parallax-base .title {
+		position: relative;
+		top: 0;
+		padding: .5rem 0;
+		margin: 0 0 1em;
+		text-align: center;
+		
+		span {
+			text-align: center;
+			float: none;
+			line-height: 1.5;
+			font-weight: 300;
+		}
+	}
+}
+
+/*****************************************************************************
+ run if visible
+ ...
+ - if enabled, adds "riv" to body class and adds "riv" to class of registered 
+   elements when they appear in the viewport
+ - rules out touch devices in code
+*/
+
+// not visible
+.riv section.parallax-base .title {
+	left: -200%;
+	transition: left .4s ease-in-out;
+}
+
+// visible
+.riv section.parallax-base .title.riv {
+	left: 0;
+}

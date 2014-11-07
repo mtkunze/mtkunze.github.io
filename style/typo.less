@@ -1,0 +1,325 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:400,300,100);
+
+@headerfont: 'Lato', 'helvetica neue', sans-serif;
+@textfont: @headerfont;
+
+
+/********* GENERAL FONT SELECTION ********************************************/
+
+body, input, textarea, label, table, td {	
+	font-family: @textfont;
+	font-weight: 300;
+	font-size: @fontsize;
+	line-height: 1.5;
+	color: @text;
+	
+	strong, .bold {
+		font-weight: 400;
+	}
+	
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+}
+
+section h1, section h2, section h3 {
+//	font-family: 'Lato', 'helvetica neue', sans-serif;
+	font-weight: 100;
+	line-height: 1.2;
+	margin: 1.2em 0 .3em 0;
+	small {
+		display: block;
+		font-size: 50%;
+		font-weight: 300;
+	}
+}
+
+section h1 {font-size: 3em}
+section h2 {font-size: 2em}
+section h3,
+nav h3 {
+	font-size: 1.3em; 
+	text-transform: uppercase; 
+	font-weight: 300
+}
+
+section p,
+section ul	 {
+	margin-top: .3em;
+	margin-bottom: .7em;
+	
+	-webkit-hyphens: auto;
+       -moz-hyphens: auto;
+// hyphens don't work well in all browsers!	   
+//	    -ms-hyphens: auto;
+//       -o-hyphens: auto;
+//          hyphens: auto;
+}
+
+.no-hyphen {
+	// CHECK if prefixes of other brwosers are enabled for hyphens, repeat them here
+	-webkit-hyphens: none;
+       -moz-hyphens: none;
+            hyphens: none;
+}
+
+sup {
+	font-size: 0.4em;
+	vertical-align: top;
+}
+
+abbr {
+	position: relative;
+	border-bottom: 1px dotted @text;
+	cursor: default;
+}
+
+abbr[data-title]:after {
+	position: absolute;
+	content: attr(data-title);
+	
+	display: block;
+	bottom: 25px;
+	left: -10;
+	min-width: 150px;
+	border-radius: 2px;
+	padding: 2px 6px 4px;
+		
+	background-color: @text;
+	box-shadow: 0 0 4px 0 @text;
+	color: @back;
+	font-size: .8em;
+	font-weight: 400;
+}
+
+abbr[data-title]:before {
+	position: absolute;
+	content: " ";
+	bottom: 21px;
+	
+	border: solid;
+	border-color: @text transparent;
+	border-width: 5px 5px 0 5px;
+	left: 10px;
+}
+
+abbr[data-title]:before, 
+abbr[data-title]:after {
+	display: none;
+}
+
+abbr[data-title]:hover:after, 
+abbr[data-title]:hover:before {
+	display: inherit;
+}
+
+/********* LISTS *************************************************************/
+
+section ul.list {
+	
+	li {
+		position: relative;
+		padding: .3em 0 .7em .7em;
+	}
+		
+	li:before {
+		position: absolute;
+		top: .3em;
+		left: 0;
+		content: "\0BB";
+	}
+	
+	ul.list {
+		margin: 0;
+		
+		li {
+			padding: 0 0 0 .7em;
+		}
+		li:before {
+			top:0;
+			content: "-";
+		}
+	}
+}
+
+section p + ul.list,
+section ul.list p + ul.list {
+	margin-top: -.5em;
+}
+
+/********* LINKS *************************************************************/
+
+a {
+	text-decoration: none;
+}
+
+section .inner {
+	a.ln {
+		position: relative;
+		z-index: 5;
+		text-decoration: none;
+		color: blue;
+		transition: color .3s ease;
+		
+		// avoid wrapping, preserves proper boxes for highlighting
+		white-space: nowrap;
+	}
+	
+	a.ln:after {
+		content: " ";
+		position: absolute;
+		border-radius: 2px;
+		top:0;
+		left: 50%;
+		width: 0%;
+		height: 100%;
+		
+		padding: 1px 3px 1px 23px;
+		margin-left: -23px;
+		
+		background: transparent 3px 4px no-repeat;
+		background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAVlpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KTMInWQAAAUlJREFUKBWlkz1OA0EMhXeGvxNE4gZIS8UB4AirNOmh5SYUtJxjRc0tEHTUREKiSBHIzs4u3zOekCKREFhy3tjv2fPjTajcxnGMIYRBIesaOB2GYRJjfGP9BPfs3FqnWOIg7LrujII257wgtzZyC+XFb+pVGD3RUPRZKhBnXFZSo/ON663OdiyFQgpWoArn+FLV4IdQfDmBmlQQrROdcMNuWV/A2/aANQBbK4Ss6WZ3lAZ/wR/wR7hLicApcQLNWEtfi5gpQ0KunU+sq/8Q73uDBv5dOrdZJJgUHbjC5y4+QKSxZPAQvAfvQJOrjjHaHJVQ9gg/tiCEhFDb7IE6UQNeg6IrqyPYeee+768kRLP9ziI5wtbX5iFvUkrnIPU/45JedWaaGwL7QISQZc6vxLvnTMP/fWE0+NO3/f3uHF4n0OvqHqx/9a/6ApBbTjgS4UTPAAAAAElFTkSuQmCC);
+		
+		opacity: 0;
+		
+		transition: 
+			width .3s ease, 
+			left .3s ease, 
+			opacity .3s ease;
+		z-index: 1;
+	}
+	
+	a.ln[href^="http"]:after,
+	a.ln[href^="https"]:after {
+		background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAVlpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KTMInWQAAATxJREFUKBWdk01qAkEQhdOirrPxDIExGw+QnECMG/d6lxxIzyK68wAhIKiQP810vldWTVpwEfLgTf131XTNpBtHzrmVUqploleIPuzBV7gitkYq1uTJliO5HKDP4R6WkC3/oMy3k9wxIvhRVlzRFR95fktSB6hjFL570Rb5DCWF8CvPJohijSREwhE9Omgi2UI0mEdhhbN8xxp77BN1XY7rWu4Gyq808qRx5fyG/ugFbfQE224/oCsemOiltQ4hwz18IjplNSd0RDphz9CHcIeOMPTKzt8EYralwtgdl0t0QXHlCdZ5RcIBaoqjksGLHnS9sHHJVp7yVWcd4rbjNjecfAdv4T2ULUR8YYVeXO7565yXJQ8w1vTp/t8947AvBXntC4s78DrrHPu3Ol3Mv75tK/LRm7+Fw/70V/0ARdIz12fvvm4AAAAASUVORK5CYII=);
+	}
+	
+	a.ln:hover:after {
+		background-color: @text;
+		opacity: 1;
+		left: 0%;
+		width: 100%;
+		z-index: -1;
+		box-shadow: 0 0 13px 5px @back;
+	}
+	
+	a.ln:hover {
+		color: @back;
+	}
+	
+}
+/*
+// if rotation is supported, highlight links with background
+// additional markup is required if links are on a text line with elements of
+// different height, e.g., images. Then, vertical alignment would break.
+.csstransforms section .inner {
+	a, a .lnk {
+		background-color: transparent;
+		color: @text;
+	}
+	
+	a:hover, a:hover .lnk {
+		// TODO update text color
+		text-decoration: none;
+	}
+	
+	a .lnk:before, a:hover .lnk:after {
+//		background-color: fadeout(@todo1, 30%);
+	
+		content: " ";
+		position: absolute;
+		left: 0;
+		top: 0.15em;
+		width: 100%;
+		height: 100%; 
+		padding: 0.1em;
+		margin: -0.17em -0.1em -0.03em;
+		.border-radius;
+		display: block;
+		z-index: -1;	
+		
+		-webkit-transform: rotate(-2deg);
+		   -moz-transform: rotate(-2deg);
+		        transform: rotate(-2deg);
+	}
+	
+
+	a:hover .lnk:before {
+		-webkit-transform: rotate(-5deg);
+		   -moz-transform: rotate(-5deg);
+		        transform: rotate(-5deg);
+	}
+
+	a:hover .lnk:after {
+//		background-color: fadeout(@todo2, 30%);
+		z-index: -2;
+	
+		-webkit-transform: rotate(3deg);
+		   -moz-transform: rotate(3deg);
+		        transform: rotate(3deg);
+	}
+}
+*/
+/********* IMAGES ************************************************************/
+
+// figure {
+// 	text-align: center;
+// 	margin: .6em 2em 1.4em 2em;
+// 	background-color: #fff;
+// 	box-shadow: 0 0 25px -10px @text;
+//
+// 	img {
+// 		margin: 1.2em;
+// 	}
+//
+// 	.imgwrap {
+// 		padding: .5em;
+// 	}
+//
+// 	.imgwrap img {
+// 		margin: 0;
+// 		max-width: 100%;
+// 	}
+// }
+//
+// figcaption {
+// 	text-align: left;
+// 	line-height: 1.1em;
+// 	padding: 1.2em;
+// 	margin-top: -1.2em;
+// 	font-size: .9em;
+// 	font-style: italic;
+// 	font-weight: 400;
+// 	color: @high_alt; //lighten(@text, 15%);
+// }
+
+// figure:hover {
+// 	-webkit-transform: rotate(3deg);
+// 	   -moz-transform: rotate(3deg);
+// 	        transform: rotate(3deg);	
+// }
+
+/********* QUOTES ************************************************************/
+blockquote {
+	position: relative;
+	font-style: italic;
+	font-weight: 400;
+	font-size: 1.1em;
+}
+blockquote:before {
+  color: lighten(@text, 30%);
+  content: "“";
+  font-size: 3em;
+  position: absolute;
+  left: -.5em;
+  top: -.3em;
+}
+
+/********* STUFF *************************************************************/
+.time, .location {
+	line-height: 1.3em;
+	font-size: .9em;
+	font-weight: 400;
+	display: block;
+	padding-bottom: 0.2em;
+//	color: @high_alt;
+}

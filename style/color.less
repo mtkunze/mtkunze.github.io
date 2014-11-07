@@ -1,0 +1,66 @@
+@text: #444;
+@back: #fff; //lighten(#f0ece8, 5%); //#fcfcfc;
+@bodyback: #ccc;
+
+@high: saturate(lighten(rgb(34, 85, 170), 20%), 60%); //#00C8C8;
+
+.blackToText {
+	opacity: 0.73;
+}
+
+
+/*****************************************************************************/
+
+// background of teaser picture: #8A5F3D
+
+// http://design-seeds.com/index.php/home/entry/mushroom-tones
+@base:  #87653e; // brown
+@high1: #667820; // green
+
+/* / http://design-seeds.com/index.php/home/entry/color-served
+@base:  #805c43; // brown
+@high1: #4bb4e8; // light blue
+@high2: #f0bd7a; // cream, light brown
+@high3: #45242d; // mix of violet and dark brown
+
+//@high: @high1;
+*/
+
+/* // http://design-seeds.com/index.php/home/entry/strawberry-delight
+@base:  #875943; // brown
+@high1: #0a384a; // dark blue
+@high2: #80cfc3; // turquoise
+@high3: #db3a2e; // red
+*/
+
+// others
+@inter: #3D749E;
+@high_alt: saturate(darken(#76CAB4, 20%), 0%);
+	// #58C890 // a green
+	// #8B6241; 
+	// darken(#db3a2e, 30%); 
+	// darken(#5CC78D, 20%); 
+	//
+
+@high: saturate(lighten(@inter, 10%), 60%);
+
+@text: #515259;
+@high: saturate(darken(#64a2e8, 5%), 40%);
+@high_alt: #63b65a;
+
+@high_dark: darken(@high, 30%);
+@high_bright: lighten(@high, 10%);
+
+@fadebg: 80%;
+@fadetitle: 40%;
+
+
+/****************************************************************************/
+
+@aboutme: @text;
+@aboutme2: #F9913E;
+@hireme: #F0292E;
+@hireme_dark: darken(@hireme, 30%);
+@curriculum: #027EBE;
+@projects: #08A95C;
+@contact: #7D4294;

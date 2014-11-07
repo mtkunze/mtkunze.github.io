@@ -1,0 +1,128 @@
+// #hireme .parallax-back {
+// 	background-image: url(../img/hireme/mb_s.jpg);
+// }
+
+@media screen and (min-width: @lap) {
+	#hireme .parallax-back {
+		background-image: url(../img/hireme/mb_m.jpg);
+	}	
+}
+
+@media screen and (min-width: @desk) {
+	#hireme .parallax-back {
+		background-image: url(../img/hireme/mb_l.jpg);
+	}	
+}
+
+#hireme section {
+	border-color: @hireme;
+	
+	::-moz-selection {
+	    background: lighten(@hireme, 20%);
+		color: #fff;
+	}
+
+	::selection {
+	    background: lighten(@hireme, 20%);
+		color: #fff;
+	}
+
+	.title span {
+		color: @hireme;
+		text-shadow: 0 0 1px @hireme;
+	}
+	.title small {
+		color: @back;
+		background-color: @hireme;
+	}	
+	
+	h1, h2, h3,
+	.list li:before {
+		color: darken(@hireme, 0%);
+	}
+	
+	// .inner {
+	
+	a {
+		color: darken(@hireme, 20%);
+	}
+	
+	a:hover {
+		color: @back;
+		border-color: @hireme;
+	}
+	a:hover:after {
+		background-color: @hireme;
+	}
+	
+	a:hover .icon {
+		background-color: fade(@hireme, 40%);
+		border-color: fade(@hireme, 100%);
+	}
+	
+	// }
+	
+	@headshotborder: 10px;
+	@headshotrot: -7deg;
+	
+	.headshot {
+		position: relative;
+		max-width: 150px;
+
+		display: block;
+		margin: 0 auto;
+
+		border: @headshotborder solid #eee;
+		box-shadow: 0px 2px 20px -10px fade(@text, 80%);
+		transform: rotateZ(@headshotrot + 4deg);
+		
+		img {
+			width: 100%;
+		}
+	}
+	
+	.headshot:before {
+	    content: " ";
+	    position: absolute;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    left: 0;
+	    background: 
+			-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, .15)), to(rgba(0, 0, 0, .25))), 
+			-webkit-gradient(linear, left top, right bottom, color-stop(0, rgba(255, 255, 255, 0)), color-stop(0.5, rgba(255, 255, 255, .1)), color-stop(0.501, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, 0)));
+	    background: 
+			-moz-linear-gradient(top, rgba(255, 255, 255, .15), rgba(0, 0, 0, .25)), 
+			-moz-linear-gradient(left top, rgba(255, 255, 255, 0), rgba(255, 255, 255, .1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0));			
+	    background: 
+			linear-gradient(top, rgba(255, 255, 255, .15), rgba(0, 0, 0, .25)), 
+			linear-gradient(left top, rgba(255, 255, 255, 0), rgba(255, 255, 255, .1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0));
+	}
+	
+	.headshot:after {
+		content: " ";
+		position: absolute;
+		left: -3px;
+		top: -10px - @headshotborder;
+		width: 30px;
+		height: 100px;
+		
+		transform: rotateZ(-1 * @headshotrot);
+		background: url(../img/hireme/clippy.png) no-repeat left top;
+	}
+	
+	
+	
+	//
+// 	.headshot:after {
+// 		content: "hello";
+// //		position: absolute;
+// 		top:10px;
+// 		left:0;
+// 		width: 100%;
+// 		height: 100%;
+// 		z-index: 2;
+//
+// 		background-color: fade(red, 60%);
+// 	}
+}
