@@ -1238,6 +1238,7 @@ section#aboutme dt {
 #hireme section .headshot {
   position: relative;
   max-width: 150px;
+  line-height: 0;
   display: block;
   margin: 0 auto;
   border: 10px solid #eeeeee;
