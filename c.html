@@ -1,0 +1,32 @@
+<html>
+<div id="o"></div>
+
+<style>
+	html, body {
+		width: 100%;
+		margin: 0;
+		padding:0;
+	}
+	
+	#o {
+		margin-top: 40%;
+		text-align: center;
+		font-size: 30pt;
+	}
+	
+</style>
+
+<script>
+	function countDown(to) {
+		var s = parseInt((new Date(to) - new Date())/1000);
+		
+		document.getElementById("o").innerHTML = s;
+
+		if (s > 0) {
+			setTimeout(function(){countDown(to)}, 1000);
+		}
+	}
+	
+	countDown('2017-04-07 12:00')
+</script>
+</html>
