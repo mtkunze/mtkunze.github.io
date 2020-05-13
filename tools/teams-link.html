@@ -84,12 +84,12 @@
 
       function get_meeting_link(tid, oid, mid) {
         var tpl = "https://teams.microsoft.com/l/meetup-join/19:meeting_{mid}@thread.v2/0?context={\"Tid\":\"{tid}\",\"Oid\":\"{oid}\"}"
-        return tpl.replace("{mid}", mid).replace("{tid}", tid).replace("{oid}", oid)
+        return encodeURI(tpl.replace("{mid}", mid).replace("{tid}", tid).replace("{oid}", oid))
       }
 
       function get_options_link(tid, oid, mid) {
         var tpl = "https://teams.microsoft.com/meetingOptions/?organizerId={oid}&tenantId={tid}&threadId=19_meeting_{mid}@thread.v2&messageId=0&language=de-DE"
-        return tpl.replace("{mid}", mid).replace("{tid}", tid).replace("{oid}", oid)
+        return encodeURI(tpl.replace("{mid}", mid).replace("{tid}", tid).replace("{oid}", oid))
       }
 
       function create_link(){
