@@ -48,6 +48,11 @@
   </head>
 
   <body>
+    
+    <p id="out">
+
+    </p>
+    
     <p id="in">
       <label for="tid">Organizer Id</label>
       <input type="text" name="oid" id="tid"><br/>
@@ -58,26 +63,20 @@
       <button type="button" name="button" onclick="create_link()">Generate Link</button>
     </p>
 
-    <p id="out">
-
-    </p>
-
     <script>
 
       function generate_mid() {
-        var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        chars = chars + chars.toLowerCase() + "1234567890"
-        var len = 47;
+        var chars_u = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var chars = chars_u + chars_u.toLowerCase() + "1234567890"
+        var len = 46; // output string must have length 47
 
-        var out = ""
+        // ensure first character uppercase letter
+        var out = chars_u[parseInt(Math.random() * chars_u.length)]
 
-        // generate random string
+        // generate random string for remaining characters
         while(len--) {
           out += chars[parseInt(Math.random() * chars.length)]
         }
-
-        // turn first letter uppercase
-
 
         return out;
       }
